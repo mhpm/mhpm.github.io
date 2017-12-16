@@ -1,6 +1,6 @@
-# rcm-manager
+# rcm
 
-> RCM manager Project
+> manage rcm
 
 ## Build Setup
 

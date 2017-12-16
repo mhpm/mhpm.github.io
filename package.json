@@ -1,7 +1,7 @@
 {
-  "name": "rcm-manager",
+  "name": "rcm",
   "version": "1.0.0",
-  "description": "RCM manager Project",
+  "description": "manage rcm",
   "author": "Michelle Perez Morales <michelleeepm@gmail.com>",
   "private": true,
   "scripts": {
