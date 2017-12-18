@@ -66,23 +66,27 @@ export default {
         msg: ""
         };
     },
-    created: function() {},
+    created: function() {
+        var vm = this;
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                vm.$router.push({ name: "Home" });
+            }
+            });
+    },
     methods: {
         Login: function(email, password) {
         var vm = this;
         firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-                vm.redirectToHome();
+                vm.$router.push({ name:'Home'});
             })
             .catch(function(error) {
-            if (error.code == "auth/weak-password") {
-                vm.errorMessage = error.code;
-            } else {
-                vm.errorMessage = "Usuario o Contraseña Incorrecta";
-            }
+                if (error.code == "auth/weak-password") {
+                    vm.errorMessage = error.code;
+                } else {
+                    vm.errorMessage = "Usuario o Contraseña Incorrecta";
+                }
             });
-        },
-        redirectToHome: function() {
-            this.$router.push({ name:'Home'});
         }
     }
 }

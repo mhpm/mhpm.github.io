@@ -12,29 +12,29 @@
         </div>
         <div id="navbarItems" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item has-text-dark">
-                    <router-link to="/Home">Inicio</router-link>
-                </a>
-                <a class="navbar-item has-text-dark">
-                    <router-link to="/Report">Reporte Semanal</router-link>
-                </a>
+                <router-link to="/Home">
+                    <a class="navbar-item has-text-dark">Inicio</a>
+                </router-link>
+                <router-link to="/Report">
+                    <a class="navbar-item has-text-dark">Reporte Semanal</a>
+                </router-link>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link has-text-dark">
                         Formatos
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item has-text-dark">
-                          <router-link to="/Datos"> Datos Generales </router-link>
-                        </a>
-                        <a class="navbar-item has-text-dark">
-                            <router-link to="/RMiembros">Registro de Miembros</router-link>
-                        </a>
-                        <a class="navbar-item has-text-dark">
-                            <router-link to="/Extiende">Extiende tu mano</router-link>
-                        </a>
-                        <a class="navbar-item has-text-dark">
-                           <router-link to="/Metas"> Metas</router-link>
-                        </a>
+                        <router-link to="/Datos">
+                            <a class="navbar-item has-text-dark">Datos Generales</a>
+                        </router-link>
+                        <router-link to="/RMiembros">
+                            <a class="navbar-item has-text-dark">Registro de Miembros</a>
+                        </router-link>
+                        <router-link to="/Extiende">
+                            <a class="navbar-item has-text-dark">Extiende tu mano</a>
+                        </router-link>
+                        <router-link to="/Metas">
+                            <a class="navbar-item has-text-dark">Metas</a>
+                        </router-link>
                         <hr class="divider">
                         <a class="navbar-item has-text-primary">
                             Version 1.0
