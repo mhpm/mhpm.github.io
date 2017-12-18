@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar is-light">
         <div class="navbar-brand">
-            <a class="navbar-item" href="#">
-                <img src="src/assets/logo4.png" width="112" height="28">
+            <a class="navbar-item">
+               <router-link to="/Home"> <img src="src/assets/logo4.png"></router-link>
             </a>
             <div class="navbar-burger burger" data-target="navbarItems">
                 <span></span>
@@ -12,31 +12,31 @@
         </div>
         <div id="navbarItems" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item has-text-dark" href="#">
-                    Inicio
+                <a class="navbar-item has-text-dark">
+                    <router-link to="/Home">Inicio</router-link>
                 </a>
-                <a class="navbar-item has-text-dark" href="#">
-                    Reporte Semanal
+                <a class="navbar-item has-text-dark">
+                    <router-link to="/Report">Reporte Semanal</router-link>
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link has-text-dark" href="">
+                    <a class="navbar-link has-text-dark">
                         Formatos
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item has-text-dark" href="#">
-                            Datos Generales
+                        <a class="navbar-item has-text-dark">
+                          <router-link to="/Datos"> Datos Generales </router-link>
                         </a>
-                        <a class="navbar-item has-text-dark" href="#">
-                            Registro de Miembros
+                        <a class="navbar-item has-text-dark">
+                            <router-link to="/RMiembros">Registro de Miembros</router-link>
                         </a>
-                        <a class="navbar-item has-text-dark" href="#">
-                            Extiende tu mano
+                        <a class="navbar-item has-text-dark">
+                            <router-link to="/Extiende">Extiende tu mano</router-link>
                         </a>
-                        <a class="navbar-item has-text-dark" href="#">
-                            Metas
+                        <a class="navbar-item has-text-dark">
+                           <router-link to="/Metas"> Metas</router-link>
                         </a>
                         <hr class="divider">
-                        <a class="navbar-item has-text-primary" href="#">
+                        <a class="navbar-item has-text-primary">
                             Version 1.0
                         </a>
                     </div>
@@ -75,9 +75,7 @@
                 });
             },
             redirectToIndex: function() {
-                alert('logOut');
-                //window.location.href = 'http://127.0.0.1:5500/index.html'
-                // window.location.href = 'https://mhpm.github.io/index.html';
+                this.$router.push({ name:'Login'});
             }
         }
     };

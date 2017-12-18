@@ -6,6 +6,13 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+// ImportingGlobal Components
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+Vue.component('app-navbar', Navbar);
+Vue.component('app-footer', Footer);
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -24,6 +24,7 @@
                                 <p class="help is-danger"></p>
                             </p>
                         </div>
+
                         <div class="field">
                             <p class="control has-icons-left">
                                 <input v-model="password" class="input is-medium" type="password" placeholder="Password"
@@ -74,7 +75,6 @@ export default {
             .signInWithEmailAndPassword(email, password)
             .then(function() {
                 vm.redirectToHome();
-                alert();
             })
             .catch(function(error) {
             if (error.code == "auth/weak-password") {
@@ -85,7 +85,7 @@ export default {
             });
         },
         redirectToHome: function() {
-        //window.location.href = 'https://mhpm.github.io/reporte.html'
+            this.$router.push({ name:'Home'});
         }
     }
 }
