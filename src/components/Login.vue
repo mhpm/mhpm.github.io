@@ -70,10 +70,7 @@ export default {
     methods: {
         Login: function(email, password) {
         var vm = this;
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(function() {
+        firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
                 vm.redirectToHome();
             })
             .catch(function(error) {

@@ -62,61 +62,73 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{}
-        },
-        methods:{
-            LogOut: function () {
-                var vm = this;
-                firebase.auth().signOut().then(function () {
-                    vm.redirectToIndex();
-                }, function (error) {
-                });
-            },
-            redirectToIndex: function() {
-                this.$router.push({ name:'Login'});
-            }
-        }
-    };
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-        // Get all "navbar-burger" elements
-        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-        // Check if there are any navbar burgers
-        if ($navbarBurgers.length > 0) {
-
-            // Add a click event on each of them
-            $navbarBurgers.forEach(function ($el) {
-                $el.addEventListener('click', function () {
-
-                    // Get the target from the "data-target" attribute
-                    var target = $el.dataset.target;
-                    var $target = document.getElementById(target);
-
-                    // Toggle the class on both the "navbar-burger" and the "navbar-menu"
-                    $el.classList.toggle('is-active');
-                    $target.classList.toggle('is-active');
-
-                });
-            });
-        }
-
+export default {
+  data() {
+    return {};
+  },
+  created: function() {
+    var vm = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+      } else {
+        vm.$router.push({ name: "Login" });
+      }
     });
+
+    $(document).ready(function() {
+      // Get all "navbar-burger" elements
+      var $navbarBurgers = Array.prototype.slice.call(
+        document.querySelectorAll(".navbar-burger"),
+        0
+      );
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+        // Add a click event on each of them
+        $navbarBurgers.forEach(function($el) {
+          $el.addEventListener("click", function() {
+            // Get the target from the "data-target" attribute
+            var target = $el.dataset.target;
+            var $target = document.getElementById(target);
+
+            // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+            $el.classList.toggle("is-active");
+            $target.classList.toggle("is-active");
+          });
+        });
+      }
+    });
+  },
+  methods: {
+    LogOut: function() {
+      var vm = this;
+      firebase
+        .auth()
+        .signOut()
+        .then(
+          function() {
+            vm.redirectToIndex();
+          },
+          function(error) {}
+        );
+    },
+    redirectToIndex: function() {
+      this.$router.push({ name: "Login" });
+    }
+  }
+};
 </script>
 
 <style scoped>
-    .navbar-burger{
-        background-color: #6abfb0 !important;
-    }
-    .navbar-burger span {
-        height: 3px;
-        left: calc(50%);
-    }
-    hr {
-        background-color: #6abfb0;
-        margin: 0px;
-    }
+.navbar-burger {
+  background-color: #6abfb0 !important;
+}
+.navbar-burger span {
+  height: 3px;
+  left: calc(50%);
+}
+hr {
+  background-color: #6abfb0;
+  margin: 0px;
+}
 </style>

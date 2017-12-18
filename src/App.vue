@@ -1,6 +1,6 @@
 <template>
 <div>
-  <app-navbar></app-navbar>
+  <app-navbar v-if="$route.path != '/'"></app-navbar>
   <router-view></router-view>
   <app-footer></app-footer>
 </div>
