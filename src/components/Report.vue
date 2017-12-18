@@ -486,18 +486,6 @@
                 this.inter = "";
                 this.intTotal = this.intRows.length;
                 this.total = this.bauTotal + this.amiTotal + this.ninTotal + this.intTotal;
-            },
-            LogOut: function() {
-                var vm = this;
-                firebase.auth().signOut().then(function() {
-                    vm.redirectToIndex();
-                },
-                function(error) {}
-                );
-            },
-            redirectToIndex: function() {
-                //window.location.href = "http://127.0.0.1:5500/index.html";
-                //window.location.href = 'https://mhpm.github.io/index.html';
             }
         }
     };
