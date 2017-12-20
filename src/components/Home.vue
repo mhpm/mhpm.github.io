@@ -1,35 +1,23 @@
 <template>
-<section>
-    <div class="hero-body">
-        <div class="container">
-            <div class="notification">
-                <h1 class="title is-h1 has-text-centered">Bienvenido</h1>
-            </div>
-        </div>
-    </div>
-    <section class="section">
-      <div class="container">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image">
-              <img src="src/assets/orar.jpg" width="300px">
+<div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-vcentered">
+          <div class="column is-6">
+            <figure class="">
+              <img src="src/assets/rcmGraphics.png" width="500">
             </figure>
           </div>
-          <div class="content">
-            <section class="section">
-              <div class="container">
-                <p class="title is-1">Orar</p>
-                <p class="subtitle is-5">
-                  Se ora principalmente por uno mismo, para que Dios de gracia, 
-                  intrepidez y valor, se ora por nuestro hijo(a) espiritual para encontrar el momento más apropiado para contactarles.
-                </p>
-              </div>
-            </section>
+          <div class="column is-6">
+            <h1 class="title is-2">
+              Manage RCM
+            </h1>
+            <h2 class="subtitle is-4">
+              Administra y Gestiona Grupos Celulares de una Formas mas Facil.
+            </h2>
           </div>
         </div>
       </div>
-    </section>
-</section>
+    </div>
 </template>
 <script>
 export default {};
