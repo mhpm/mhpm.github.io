@@ -12,11 +12,8 @@
         </div>
         <div id="navbarItems" class="navbar-menu">
             <div class="navbar-start">
-                <router-link to="/Home">
-                    <a class="navbar-item has-text-dark">Inicio</a>
-                </router-link>
-                <router-link to="/Report">
-                    <a class="navbar-item has-text-dark">Reporte Semanal</a>
+                <router-link class="navbar-item has-text-dark" to="/Report">
+                    Reporte Semanal
                 </router-link>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link has-text-dark">
@@ -26,14 +23,14 @@
                         <router-link to="/Datos">
                             <a class="navbar-item has-text-dark">Datos Generales</a>
                         </router-link>
+                        <router-link to="/Metas">
+                            <a class="navbar-item has-text-dark">Metas</a>
+                        </router-link>
                         <router-link to="/RMiembros">
                             <a class="navbar-item has-text-dark">Registro de Miembros</a>
                         </router-link>
                         <router-link to="/Extiende">
                             <a class="navbar-item has-text-dark">Extiende tu mano</a>
-                        </router-link>
-                        <router-link to="/Metas">
-                            <a class="navbar-item has-text-dark">Metas</a>
                         </router-link>
                         <hr class="divider">
                         <a class="navbar-item has-text-primary">
@@ -70,6 +67,7 @@ export default {
     var vm = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+          console.log(user.email);
       } else {
         vm.$router.push({ name: "Login" });
       }
@@ -102,18 +100,11 @@ export default {
   methods: {
     LogOut: function() {
       var vm = this;
-      firebase
-        .auth()
-        .signOut()
-        .then(
-          function() {
-            vm.redirectToIndex();
+      firebase.auth().signOut().then(function() {
+            vm.$router.push({ name: "Login" });
           },
           function(error) {}
         );
-    },
-    redirectToIndex: function() {
-      this.$router.push({ name: "Login" });
     }
   }
 };

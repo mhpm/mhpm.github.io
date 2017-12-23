@@ -70,7 +70,7 @@ export default {
         var vm = this;
             firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                vm.$router.push({ name: "Home" });
+                vm.$router.push({ name: "Report" });
             }
             });
     },
@@ -78,7 +78,7 @@ export default {
         Login: function(email, password) {
         var vm = this;
         firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-                vm.$router.push({ name:'Home'});
+                vm.$router.push({ name:'Report'});
             })
             .catch(function(error) {
                 if (error.code == "auth/weak-password") {

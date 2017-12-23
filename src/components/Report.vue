@@ -1,5 +1,4 @@
 <template>
-<section>
     <div class="hero-body">
         <div class="container">
 
@@ -323,7 +322,6 @@
 
         </div>
     </div>
-</section>
 </template>
 
 <script>
