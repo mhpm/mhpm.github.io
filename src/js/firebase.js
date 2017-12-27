@@ -1,9 +1,9 @@
 var config = {
-    apiKey: "AIzaSyBxlRYB7OidiGaIAiIaIkNhjM-nUB5PQwE",
-    authDomain: "rcm-manager.firebaseapp.com",
-    databaseURL: "https://rcm-manager.firebaseio.com",
-    projectId: "rcm-manager",
-    storageBucket: "rcm-manager.appspot.com",
-    messagingSenderId: "456447116065"
+    apiKey: "AIzaSyBywcm0BAkYOU6FeWLcLfbbFbzAn7gfKvo",
+    authDomain: "chatapp-eaf4f.firebaseapp.com",
+    databaseURL: "https://chatapp-eaf4f.firebaseio.com",
+    projectId: "chatapp-eaf4f",
+    storageBucket: "chatapp-eaf4f.appspot.com",
+    messagingSenderId: "93573321259"
 };
 firebase.initializeApp(config);

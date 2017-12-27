@@ -159,9 +159,7 @@
                             <table class="table is-fullwidth">
                                 <tr>
                                     <th></th>
-                                    <th>
-                                        </span>
-                                    </th>
+                                    <th></th>
                                 </tr>
                                 <tr v-for="row, index in bauRows">
                                     <td>
@@ -189,9 +187,7 @@
                             <table class="table is-fullwidth">
                                 <tr>
                                     <th></th>
-                                    <th>
-                                        </span>
-                                    </th>
+                                    <th></th>
                                 </tr>
                                 <tr v-for="row, index in amiRows">
                                     <td>
@@ -219,9 +215,7 @@
                             <table class="table is-fullwidth">
                                 <tr>
                                     <th></th>
-                                    <th>
-                                        </span>
-                                    </th>
+                                    <th></th>
                                 </tr>
                                 <tr v-for="row, index in ninRows">
                                     <td>
@@ -249,9 +243,7 @@
                             <table class="table is-fullwidth">
                                 <tr>
                                     <th></th>
-                                    <th>
-                                        </span>
-                                    </th>
+                                    <th></th>
                                 </tr>
                                 <tr v-for="row, index in intRows">
                                     <td>
@@ -310,7 +302,7 @@
                     <section class="hero is-medium is-warning">
                         <div class="hero-body">
                             <div class="container" id="StatusBoard">
-                                <i id="icon" class="fa fa-refresh fa-spin fa-4x fa-fw"></i>
+                                <i id="icon" class="fa fa-cog fa-spin fa-5x fa-fw"></i>
                                 <h1 id="tStatus" class="title is-1">Enviando Reporte ...</h1>
                                 <h4 id="tMsg" class="subtitle is-4">Espere porfavor</h4>
                             </div>
@@ -328,6 +320,8 @@
     export default {
         data() {
             return {
+            DocRef:'',
+            LiderData:{},
             celula: "",
             lider: "",
             asistente: "",
@@ -377,26 +371,19 @@
         methods: {
             SendEmail: function() {
                 this.fillList();
-                emailjs.send("michelleeepm_gmail_com", "test_template", {
-                        data: this.$data
-                    }).then(
-                        function(response) {
-                            console.log(
-                            "SUCCESS. status=%d, text=%s",
-                            response.status,
-                            response.text
-                            );
-                            this.status = "Reporte Enviado!";
-                            this.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
-                            this.showClass = "is-primary";
-                        },
-                        function(err) {
+                var vm = this;
+                emailjs.send("michelleeepm_gmail_com", "test_template", { data: this.$data})
+                    .then(function(response) {
+                        console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
+                        vm.status = "Reporte Enviado!";
+                        vm.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
+                        vm.showClass = "is-primary";
+                    }, function(err) {
                             console.log("FAILED. error=", err);
-                            this.status = "Envio Fallido";
-                            this.msg = "Revisa tu conexion a internet ó intentalo mas tarde!";
-                            this.showClass = "is-danger";
-                        }
-                    );
+                            vm.status = "Envio Fallido";
+                            vm.msg = "Revisa tu conexion a internet ó intentalo mas tarde!";
+                            vm.showClass = "is-danger";
+                    });
                 this.ShowModal();
             },
             AddRow: function(name, list) {
@@ -423,6 +410,7 @@
                 }
             },
             ShowModal: function() {
+                var vm = this;
                 $(document).ready(function() {
                     $(".modal").addClass("is-active");
 
@@ -431,46 +419,34 @@
                     }, 4000);
 
                     $(".modal-close").click(function() {
-                    $(".modal").removeClass("is-active");
-                    RestarShow();
+                        $(".modal").removeClass("is-active");
+                        RestarShow();
                     });
 
                     function RestarShow() {
-                    $(".hero")
-                        .removeClass(this.showClass)
-                        .addClass("is-warning");
-                    $("#tStatus").remove();
-                    $("#tMsg").remove();
-                    $("#icon").remove();
-                    this.status = "Enviando Reporte ...";
-                    this.msg = "Espere porfavor";
-                    $("#StatusBoard").append(
-                        "<i id='icon' class='fa fa-refresh fa-spin fa-4x fa-fw'></i>" +
-                        "<h1 id='tStatus' class='title'>" +
-                        this.status +
-                        "</h>" +
-                        "<h4 id='tMsg' class='subtitle is-4'>" +
-                        this.msg +
-                        "</h4>"
-                    );
+                        $(".hero").removeClass(vm.showClass).addClass("is-warning");
+                        $("#tStatus").remove();
+                        $("#tMsg").remove();
+                        $("#icon").remove();
+                        vm.status = "Enviando Reporte ...";
+                        vm.msg = "Espere porfavor";
+                        $("#StatusBoard").append(
+                            "<i id='icon' class='fa fa-cog fa-spin fa-5x fa-fw'></i>" +
+                            "<h1 id='tStatus' class='title'>" +vm.status + "</h1>" +
+                            "<h4 id='tMsg' class='subtitle is-4'>" + vm.msg + "</h4>"
+                        );
                     }
 
                     function Status() {
-                    $("#tStatus").remove();
-                    $("#tMsg").remove();
-                    $("#icon").remove();
-                    $(".hero")
-                        .removeClass("is-warning")
-                        .addClass(this.showClass);
-                    $("#StatusBoard").append(
-                        "<i id='icon' class='fa fa-check-circle fa-5x' aria-hidden='true'></i>" +
-                        "<h1 id='tStatus' class='title is-1'>" +
-                        this.status +
-                        "</h>" +
-                        "<h4 id='tMsg' class='subtitle is-4'>" +
-                        this.msg +
-                        "</h4>"
-                    );
+                        $("#tStatus").remove();
+                        $("#tMsg").remove();
+                        $("#icon").remove();
+                        $(".hero").removeClass("is-warning").addClass(vm.showClass);
+                        $("#StatusBoard").append(
+                            "<i id='icon' class='fa fa-check-circle fa-5x' aria-hidden='true'></i>" +
+                            "<h1 id='tStatus' class='title is-1'>" + vm.status +"</h1>" +
+                            "<h4 id='tMsg' class='subtitle is-4'>" + vm.msg + "</h4>"
+                        );
                     }
                 });
             },
