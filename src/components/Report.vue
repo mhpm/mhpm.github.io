@@ -293,7 +293,6 @@
                     </div>
                 </div>
             </form>
-            <a v-on:click="print">Sent</a>
         </div>
         <div v-bind:class="{modal:true, 'is-active':modalActive}">
             <div class="modal-background"></div>
@@ -354,12 +353,6 @@
             });
         },
         methods: {
-            print: function(){
-                console.log(this.bauRows.length);
-                console.log(this.amiRows.length);
-                console.log(this.intRows.length);
-                console.log(this.ninRows.length);
-            },
             SendEmail: function() {
                 var vm = this;
                 vm.modalActive = true;
