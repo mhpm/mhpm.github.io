@@ -1,15 +1,13 @@
 <template>
     <div class="hero-body">
         <div class="container">
-
             <div class="notification is-primary">
                 <h1 class="title is-h1 has-text-centered">REPORTE SEMANAL</h1>
-            </div>
-            
-            <form v-on:submit="SendEmail">
+            </div>   
+            <form id="myForm" v-on:submit="SendEmail">
                 <div class="columns">
                     <div class="column">
-                        <h1 class="title">Datos Generales</h1>
+                        <h1 class="title">Reporte Semanal</h1>
 
                         <div class="field">
                             <label class="label">Celula</label>
@@ -144,7 +142,7 @@
                     </div>
                     <div class="column">
                         <h3 class="title is-3">Asistencia General Total: {{total}}</h3>
-                        <h5 class="title is-5">Bautizados, Total: {{bauTotal}}</h5>
+                        <h5 class="title is-5">Bautizados, Total: {{bauRows.length}}</h5>
                         <div class="field has-addons">
                             <div class="control">
                                 <input class="input" v-model="bautizados" type="text" placeholder="Nombre completo">
@@ -172,7 +170,7 @@
                             </table>
                         </div>
 
-                        <h5 class="title is-5">Amigos, Total: {{amiTotal}}</h5>
+                        <h5 class="title is-5">Amigos, Total: {{amiRows.length}}</h5>
                         <div class="field has-addons">
                             <div class="control">
                                 <input class="input" v-model="amigos" type="text" placeholder="Nombre completo">
@@ -200,7 +198,7 @@
                             </table>
                         </div>
 
-                        <h5 class="title is-5">Niños, Total: {{ninTotal}}</h5>
+                        <h5 class="title is-5">Niños, Total: {{ninRows.length}}</h5>
                         <div class="field has-addons">
                             <div class="control">
                                 <input class="input" v-model="ninos" type="text" placeholder="Nombre completo">
@@ -228,7 +226,7 @@
                             </table>
                         </div>
 
-                        <h5 class="title is-5">Intermedios, Total: {{intTotal}}</h5>
+                        <h5 class="title is-5">Intermedios, Total: {{intRows.length}}</h5>
                         <div class="field has-addons">
                             <div class="control">
                                 <input class="input" v-model="inter" type="text" placeholder="Nombre completo">
@@ -295,21 +293,21 @@
                     </div>
                 </div>
             </form>
+            <a v-on:click="SendEmail">Sent</a>
         </div>
-        <div class="modal">
+        <div v-bind:class="{modal:true, 'is-active':modalActive}">
             <div class="modal-background"></div>
             <div class="modal-content">
-                <section class="hero is-medium is-warning">
+                <section v-bind:class="['hero is-medium', modalColor]">
                     <div class="hero-body">
                         <div class="container" id="StatusBoard">
-                            <i id="icon" class="fa fa-cog fa-spin fa-5x fa-fw"></i>
-                            <h1 id="tStatus" class="title is-1">Enviando Reporte ...</h1>
-                            <h4 id="tMsg" class="subtitle is-4">Espere por favor</h4>
+                            <h1 class="title is-1">{{status}}</h1>
+                            <h4 class="subtitle is-4">{{msg}}</h4>
                         </div>
                     </div>
                 </section>
             </div>
-            <button class="modal-close is-large" aria-label="close"></button>
+            <button v-on:click="CloseModal" class="modal-close is-large" aria-label="close"></button>
         </div>
     </div>
 </template>
@@ -318,42 +316,33 @@
     export default {
         data() {
             return {
-            celula: "",
-            lider: "",
-            asistente: "",
-            cgrupo: "Mixto",
-            tema: "1 - La palabra fuente de vida",
-            lugar: "",
-            dia: "",
-            verbo: "1 - Orar",
-            obs: "",
-            bautizados: "",
-            amigos: "",
-            ninos: "",
-            inter: "",
-            ofrenda: "",
-            elaborado: "",
-            status: "",
-            msg: "",
-            showClass: "",
-            submitted: false,
-            bauRows: [],
-            amiRows: [],
-            ninRows: [],
-            intRows: [],
-            bauList: "",
-            amiList: "",
-            ninList: "",
-            intList: "",
-            total: 0,
-            bauTotal: 0,
-            amiTotal: 0,
-            ninTotal: 0,
-            intTotal: 0,
-            sumitedForm: true
+                celula: "",
+                lider: "",
+                asistente: "",
+                cgrupo: "Mixto",
+                tema: "1 - La palabra fuente de vida",
+                lugar: "",
+                dia: "",
+                verbo: "1 - Orar",
+                obs: "",
+                bautizados: "",
+                amigos: "",
+                ninos: "",
+                inter: "",
+                ofrenda: "",
+                elaborado: "",
+                submitted: false,
+                bauRows: [],
+                amiRows: [],
+                ninRows: [],
+                intRows: [],
+                total: 0,
+                modalActive: false,
+                modalColor: 'is-warning',
+                status: "Enviando Reporte...",
+                msg: "Espere por favor"
             }
         },
-        created: function() {},
         mounted: function() {
             var vm = this;
             $(document).ready(function() {
@@ -365,93 +354,51 @@
             });
         },
         methods: {
+            print: function(){
+                console.log(this.bauRows[0].name);
+            },
             SendEmail: function() {
-                this.fillList();
                 var vm = this;
+                vm.modalActive = true;
                 emailjs.send("michelleeepm_gmail_com", "test_template", { data: this.$data})
-                    .then(function(response) {
-                        console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
-                        vm.status = "Reporte Enviado!";
-                        vm.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
-                        vm.showClass = "is-primary";
-                    }, function(err) {
-                            console.log("FAILED. error=", err);
-                            vm.status = "Envio Fallido";
-                            vm.msg = "Revisa tu conexion a internet ó intentalo mas tarde!";
-                            vm.showClass = "is-danger";
+                    .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
+                        vm.MailSent()
+                    }, function(err) { console.log("FAILED. error=", err);
+                        vm.MailFail()
                     });
-                this.ShowModal();
             },
             AddRow: function(name, list) {
                 list.push({ name: name});
-                this.Clean();
+                this.Clean()
             },
             removeRow: function(row, list) {
                 Vue.delete(list, row);
                 this.Clean();
             },
-            fillList: function() {
-                var index;
-                for (index = 0; index < this.bauRows.length; ++index) {
-                    this.bauList += this.bauRows[index].name + ", ";
-                }
-                for (index = 0; index < this.amiRows.length; ++index) {
-                    this.amiList += this.amiRows[index].name + ", ";
-                }
-                for (index = 0; index < this.ninRows.length; ++index) {
-                    this.ninList += this.ninRows[index].name + ", ";
-                }
-                for (index = 0; index < this.intRows.length; ++index) {
-                    this.intList += this.intRows[index].name + ", ";
-                }
+            MailFail: function() {
+                this.status = "Envío Fallido";
+                this.msg = "Revisa tu conexión a internet ó intentalo mas tarde!";
+                this.modalColor = 'is-danger';
+                this.exc = false;
+                this.check = true;
             },
-            ShowModal: function() {
-                var vm = this;
-                $(document).ready(function() {
-                    $(".modal").addClass("is-active");
-
-                    setTimeout(function() { Status(); }, 4000);
-
-                    $(".modal-close").click(function() {
-                        $(".modal").removeClass("is-active");
-                        RestarShow();
-                    });
-
-                    function RestarShow() {
-                        $(".hero").removeClass(vm.showClass).addClass("is-warning");
-                        $("#tStatus").remove();
-                        $("#tMsg").remove();
-                        $("#icon").remove();
-                        $("#StatusBoard").append(
-                            "<i id='icon' class='fa fa-cog fa-spin fa-5x fa-fw'></i>" +
-                            "<h1 id='tStatus' class='title'>Enviando Reporte ...</h1>" +
-                            "<h4 id='tMsg' class='subtitle is-4'>Espere por favor</h4>"
-                        );
-                    }
-
-                    function Status() {
-                        $("#tStatus").remove();
-                        $("#tMsg").remove();
-                        $("#icon").remove();
-                        $(".hero").removeClass("is-warning").addClass(vm.showClass);
-                        $("#StatusBoard").append(
-                            "<i id='icon' class='fa fa-check-circle fa-5x' aria-hidden='true'></i>" +
-                            "<h1 id='tStatus' class='title is-1'>" + vm.status +"</h1>" +
-                            "<h4 id='tMsg' class='subtitle is-4'>" + vm.msg + "</h4>"
-                        );
-                    }
-                });
+            MailSent: function() {
+                this.status = "Reporte Enviado!";
+                this.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
+                this.modalColor = 'is-primary';
+            },
+            CloseModal: function(){
+                this.modalActive = false;
+                this.status = 'Enviando Reporte...';
+                this.msg = 'Espere por favor';
+                this.modalColor = 'is-warning';
             },
             Clean: function() {
                 this.bautizados = "";
-                this.bauTotal = this.bauRows.length;
                 this.amigos = "";
-                this.amiTotal = this.amiRows.length;
                 this.ninos = "";
-                this.ninTotal = this.ninRows.length;
                 this.inter = "";
-                this.intTotal = this.intRows.length;
-                this.total = this.bauTotal + this.amiTotal + this.ninTotal + this.intTotal;
+                this.total = this.bauRows.length + this.amiRows.length + this.ninRows.length + this.intRows.length;
             }
         }
     };
