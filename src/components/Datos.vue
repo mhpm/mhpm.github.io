@@ -1,11 +1,9 @@
 <template>
     <div class="hero-body">
         <div class="container">
-
             <div class="notification is-primary">
                 <h1 class="title is-h1 has-text-centered">DATOS GENERALES DE CELULA</h1>
             </div>
-
             <form>
                 <div class="columns">
                     <div class="column">
@@ -307,7 +305,7 @@
                     <div class="column is-9">
                         <div class="columns">
                             <div class="column">     
-                                <p class="title">Miembros:</p>
+                                <p class="title">Miembros: {{Miembros.length}}</p>
                                 <div class="columns">
                                     <div class="column">
                                         <div class="field">
@@ -418,6 +416,21 @@
                     </div>
                 </div>
             </form>
+            <div class="modal">
+            <div class="modal-background"></div>
+                <div class="modal-content">
+                    <section class="hero is-medium is-warning">
+                        <div class="hero-body">
+                            <div class="container" id="StatusBoard">
+                                <i id="icon" class="fa fa-cog fa-spin fa-5x fa-fw"></i>
+                                <h1 id="tStatus" class="title is-1">Enviando Reporte ...</h1>
+                                <h4 id="tMsg" class="subtitle is-4">Espere por favor</h4>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
         </div>
     </div>
 </template>
@@ -467,7 +480,10 @@ export default {
                 amigosE:'',
                 bautismos:''
             },
-            Miembros:[]
+            Miembros:[],
+            status: "",
+            msg: "",
+            showClass: ""
         }
     },
     methods:{
@@ -481,10 +497,10 @@ export default {
                     vm.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
                     vm.showClass = "is-primary";
                 }, function(err) {
-                        console.log("FAILED. error=", err);
-                        vm.status = "Envio Fallido";
-                        vm.msg = "Revisa tu conexion a internet ó intentalo mas tarde!";
-                        vm.showClass = "is-danger";
+                    console.log("FAILED. error=", err);
+                    vm.status = "Envio Fallido";
+                    vm.msg = "Revisa tu conexion a internet ó intentalo mas tarde!";
+                    vm.showClass = "is-danger";
                 });
             this.ShowModal();
         },
@@ -495,14 +511,53 @@ export default {
         removeRow: function(row, list) {
             Vue.delete(list, row);
         },
+        ShowModal: function() {
+            var vm = this;
+            $(document).ready(function() {
+                $(".modal").addClass("is-active");
+
+                setTimeout(function() { Status(); }, 4000);
+
+                $(".modal-close").click(function() {
+                    $(".modal").removeClass("is-active");
+                    RestarShow();
+                });
+
+                function RestarShow() {
+                    $(".hero").removeClass(vm.showClass).addClass("is-warning");
+                    $("#tStatus").remove();
+                    $("#tMsg").remove();
+                    $("#icon").remove();
+                    vm.status = "Enviando Reporte ...";
+                    vm.msg = "Espere porfavor";
+                    $("#StatusBoard").append(
+                        "<i id='icon' class='fa fa-cog fa-spin fa-5x fa-fw'></i>" +
+                        "<h1 id='tStatus' class='title'>" +vm.status + "</h1>" +
+                        "<h4 id='tMsg' class='subtitle is-4'>" + vm.msg + "</h4>"
+                    );
+                }
+
+                function Status() {
+                    $("#tStatus").remove();
+                    $("#tMsg").remove();
+                    $("#icon").remove();
+                    $(".hero").removeClass("is-warning").addClass(vm.showClass);
+                    $("#StatusBoard").append(
+                        "<i id='icon' class='fa fa-check-circle fa-5x' aria-hidden='true'></i>" +
+                        "<h1 id='tStatus' class='title is-1'>" + vm.status +"</h1>" +
+                        "<h4 id='tMsg' class='subtitle is-4'>" + vm.msg + "</h4>"
+                    );
+                }
+            });
+        },
         clearMiembro: function(){
             this.Miembro.nombre = '';
-                this.Miembro.nombre = '';
-                this.Miembro.bautismo = '';
-                this.Miembro.estadoCivil = '';
-                this.Miembro.espirituSanto = false;
-                this.Miembro.direccion = '';
-                this.Miembro.telefono = '';
+            this.Miembro.nombre = '';
+            this.Miembro.bautismo = '';
+            this.Miembro.estadoCivil = '';
+            this.Miembro.espirituSanto = false;
+            this.Miembro.direccion = '';
+            this.Miembro.telefono = '';
         }
     }
 };

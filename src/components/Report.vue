@@ -295,23 +295,21 @@
                     </div>
                 </div>
             </form>
-
-            <div class="modal">
-                <div class="modal-background"></div>
-                <div class="modal-content">
-                    <section class="hero is-medium is-warning">
-                        <div class="hero-body">
-                            <div class="container" id="StatusBoard">
-                                <i id="icon" class="fa fa-cog fa-spin fa-5x fa-fw"></i>
-                                <h1 id="tStatus" class="title is-1">Enviando Reporte ...</h1>
-                                <h4 id="tMsg" class="subtitle is-4">Espere porfavor</h4>
-                            </div>
+        </div>
+        <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <section class="hero is-medium is-warning">
+                    <div class="hero-body">
+                        <div class="container" id="StatusBoard">
+                            <i id="icon" class="fa fa-cog fa-spin fa-5x fa-fw"></i>
+                            <h1 id="tStatus" class="title is-1">Enviando Reporte ...</h1>
+                            <h4 id="tMsg" class="subtitle is-4">Espere por favor</h4>
                         </div>
-                    </section>
-                </div>
-                <button class="modal-close is-large" aria-label="close"></button>
+                    </div>
+                </section>
             </div>
-
+            <button class="modal-close is-large" aria-label="close"></button>
         </div>
     </div>
 </template>
@@ -320,8 +318,6 @@
     export default {
         data() {
             return {
-            DocRef:'',
-            LiderData:{},
             celula: "",
             lider: "",
             asistente: "",
@@ -339,6 +335,7 @@
             elaborado: "",
             status: "",
             msg: "",
+            showClass: "",
             submitted: false,
             bauRows: [],
             amiRows: [],
@@ -353,7 +350,6 @@
             amiTotal: 0,
             ninTotal: 0,
             intTotal: 0,
-            showClass: "",
             sumitedForm: true
             }
         },
@@ -414,9 +410,7 @@
                 $(document).ready(function() {
                     $(".modal").addClass("is-active");
 
-                    setTimeout(function() {
-                    Status();
-                    }, 4000);
+                    setTimeout(function() { Status(); }, 4000);
 
                     $(".modal-close").click(function() {
                         $(".modal").removeClass("is-active");
@@ -428,12 +422,10 @@
                         $("#tStatus").remove();
                         $("#tMsg").remove();
                         $("#icon").remove();
-                        vm.status = "Enviando Reporte ...";
-                        vm.msg = "Espere porfavor";
                         $("#StatusBoard").append(
                             "<i id='icon' class='fa fa-cog fa-spin fa-5x fa-fw'></i>" +
-                            "<h1 id='tStatus' class='title'>" +vm.status + "</h1>" +
-                            "<h4 id='tMsg' class='subtitle is-4'>" + vm.msg + "</h4>"
+                            "<h1 id='tStatus' class='title'>Enviando Reporte ...</h1>" +
+                            "<h4 id='tMsg' class='subtitle is-4'>Espere por favor</h4>"
                         );
                     }
 
