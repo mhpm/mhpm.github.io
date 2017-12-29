@@ -293,7 +293,7 @@
                     </div>
                 </div>
             </form>
-            <a v-on:click="SendEmail">Sent</a>
+            <a v-on:click="print">Sent</a>
         </div>
         <div v-bind:class="{modal:true, 'is-active':modalActive}">
             <div class="modal-background"></div>
@@ -355,12 +355,15 @@
         },
         methods: {
             print: function(){
-                console.log(this.bauRows[0].name);
+                console.log(this.bauRows.length);
+                console.log(this.amiRows.length);
+                console.log(this.intRows.length);
+                console.log(this.ninRows.length);
             },
             SendEmail: function() {
                 var vm = this;
                 vm.modalActive = true;
-                emailjs.send("michelleeepm_gmail_com", "test_template", { data: this.$data})
+                emailjs.send("rcm1ens_gmail_com", "rcm_template", { data: this.$data})
                     .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                         vm.MailSent()
                     }, function(err) { console.log("FAILED. error=", err);

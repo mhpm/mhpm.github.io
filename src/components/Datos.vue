@@ -490,7 +490,7 @@ export default {
         SendEmail: function() {
             this.fillList();
             var vm = this;
-            emailjs.send("michelleeepm_gmail_com", "test_template", { data: this.$data})
+            emailjs.send("rcm1ens_gmail_com", "", { data: this.$data})
                 .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                         vm.MailSent()
                     }, function(err) { console.log("FAILED. error=", err);
