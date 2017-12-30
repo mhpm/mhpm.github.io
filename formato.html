@@ -489,19 +489,19 @@
                     </div>
                 </form>
                 <div v-bind:class="{modal:true, 'is-active':modalActive}">
-                <div class="modal-background"></div>
+                    <div class="modal-background"></div>
                     <div class="modal-content">
                         <section v-bind:class="['hero is-medium', modalColor]">
                             <div class="hero-body">
                                 <div class="container" id="StatusBoard">
-                                    <h1 id="tStatus" class="title is-1">{{status}}</h1>
-                                    <h4 id="tMsg" class="subtitle is-4">{{msg}}</h4>
+                                    <h1 class="title is-1">{{status}}</h1>
+                                    <h4 class="subtitle is-4">{{msg}}</h4>
                                 </div>
                             </div>
                         </section>
                     </div>
-                <button class="modal-close is-large" aria-label="close"></button>
-            </div>
+                    <button v-on:click="CloseModal" class="modal-close is-large" aria-label="close"></button>
+                </div>
             </div>
         </div>
     </div>
@@ -578,15 +578,14 @@
             },
             methods:{
                 SendEmail: function() {
-                    this.fillList();
                     var vm = this;
+                    vm.modalActive = true;
                     emailjs.send("rcm1ens_gmail_com", "formato_template", { data: this.$data})
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                                 vm.MailSent()
                             }, function(err) { console.log("FAILED. error=", err);
                                 vm.MailFail()
                         });
-                    this.ShowModal();
                 },
                 AddRow: function(m, list) {
                     list.push({nombre: m.nombre, bautismo: m.bautismo, estadoCivil: m.estadoCivil, espirituSanto: m.espirituSanto, direccion: m.direccion, telefono: m.telefono});
