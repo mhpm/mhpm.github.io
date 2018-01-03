@@ -37,9 +37,9 @@
                         <div class="column">
                             <div class="field">
                                 <p class="title is-3 is-spaced">Datos Generales</p>
-                                <p class="subtitle is-5">Celula</p>
+                                <p class="subtitle is-5">Célula</p>
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Celula" type="number" placeholder="Numero" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Celula" type="number" placeholder="Número" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required />
                                     <span class="icon is-small is-left">
                                         <i class="fab fa-slack"></i>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="columns">
                         <div class="column">
-                            <p class="subtitle is-5">Lider</p>
+                            <p class="subtitle is-5">Líder</p>
                             <div class="field">
                                 <div class="control has-icons-left">
                                     <input class="input is-medium" v-model="Lider.nombre" type="text" placeholder="Nombre completo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
@@ -62,7 +62,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Lider.telefono" type="text" placeholder="Telefono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Lider.telefono" type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -80,8 +80,8 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Lider.fecha" type="text" placeholder="Fecha de Nacimiento" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-                                        oninput="setCustomValidity('')" required>
+                                    <input class="input is-medium" v-model="Lider.fecha" type="date" placeholder="Fecha de Nacimiento" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                        oninput="setCustomValidity('')"  required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-calendar-check"></i>
                                     </span>
@@ -101,7 +101,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Asistente.telefono" type="text" placeholder="Telefono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Asistente.telefono" type="text" placeholder="Teléfono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -131,10 +131,10 @@
                     <div class="columns">
                         <div class="column">
                             <p class="title is-3 is-spaced">Reuniones</p>
-                            <p class="subtitle is-5">Planeacion</p>
+                            <p class="subtitle is-5">Planeación</p>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Planeacion.dia" type="text" placeholder="Dia de Reunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Planeacion.dia" type="text" placeholder="Dia de Réunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-calendar-check"></i>
@@ -152,7 +152,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Planeacion.anfitrion" type="text" placeholder="Nombre Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Planeacion.anfitrion" type="text" placeholder="Nombre Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="far fa-user"></i>
@@ -161,7 +161,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="text" placeholder="Tel Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="text" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -170,7 +170,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Planeacion.direccion" type="text" placeholder="Direccion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Planeacion.direccion" type="text" placeholder="Dirección" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-map-marker"></i>
@@ -192,7 +192,7 @@
                             <p class="subtitle is-5">Alcance</p>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Alcance.dia" type="text" placeholder="Dia de Reunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Alcance.dia" type="text" placeholder="Dia de Réunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-calendar-check"></i>
@@ -210,7 +210,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Alcance.anfitrion" type="text" placeholder="Nombre Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Alcance.anfitrion" type="text" placeholder="Nombre Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="far fa-user"></i>
@@ -219,7 +219,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" placeholder="Tel Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -228,7 +228,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Alcance.direccion" type="text" placeholder="Direccion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Alcance.direccion" type="text" placeholder="Dirección" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-map-marker"></i>
@@ -289,7 +289,7 @@
                             <p class="subtitle is-6">Amigos</p>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Metas.amigosA" type="number" placeholder="Total Anotados" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Metas.amigosA" type="number" placeholder="Anotados" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fab fa-slack-hash"></i>
@@ -483,7 +483,7 @@
                 Miembro:{},
                 Celula:'',
                 Lider:{
-                    nombre:' ',
+                    nombre:'',
                     telefono:'',
                     email:'',
                     fecha:''
@@ -526,6 +526,9 @@
                 modalColor: 'is-warning',
                 status: "Enviando Reporte...",
                 msg: "Espere por favor"
+            },
+            created:function(){
+                PureMask.format(".date", true);
             },
             methods:{
                 SendEmail: function() {
