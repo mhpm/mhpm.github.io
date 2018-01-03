@@ -8,7 +8,7 @@
                 <div class="columns">
                     <div class="column">
                         <div class="field">
-                        <p class="subtitle is-5">Celula</p>
+                        <p class="subtitle is-5">Célula</p>
                             <div class="control has-icons-left">
                                 <input class="input is-medium" v-model="Celula" type="number" placeholder="Numero" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required />
@@ -21,10 +21,11 @@
                 </div>
                 <div class="columns">
                     <div class="column">
-                        <p class="subtitle is-5">Lider</p>
+                        <p class="subtitle is-5">Líder</p>
                         <div class="field">
+                            <p>Nombre Completo:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Lider.nombre" type="text" placeholder="Nombre completo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Lider.nombre" type="text" placeholder="" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
@@ -32,8 +33,9 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Teléfono:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Lider.telefono" type="text" placeholder="Telefono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Lider.telefono" type="text" v-mask="'(###) ###-####'" placeholder="(###) ###-####" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-phone"></i>
@@ -41,6 +43,7 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Email:</p>
                             <div class="control has-icons-left">
                                 <input class="input is-medium" v-model="Lider.email" type="text" placeholder="Email" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
@@ -50,8 +53,9 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Fecha de Nacimiento:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Lider.fecha" type="text" placeholder="Fecha de Nacimiento" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Lider.fecha" v-mask="'##/##/####'" type="text" placeholder="dia/mes/año" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-calendar-check"></i>
@@ -62,17 +66,19 @@
                     <div class="column">
                         <p class="subtitle is-5">Asistente</p>
                         <div class="field">
+                            <p>Nombre Completo:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Asistente.nombre" type="text" placeholder="Nombre completo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Asistente.nombre" type="text" placeholder="" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
-                                    <i class="far fa-user"></i>
+                                    <i class="fas fa-user"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="field">
+                            <p>Teléfono:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Asistente.telefono" type="text" placeholder="Telefono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Asistente.telefono" type="text" v-mask="'(###) ###-####'" placeholder="(###) ###-####" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-phone"></i>
@@ -80,6 +86,7 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Email:</p>
                             <div class="control has-icons-left">
                                 <input class="input is-medium" v-model="Asistente.email" type="text" placeholder="Email" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
@@ -89,8 +96,9 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Fecha de Nacimiento:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Asistente.fecha" type="text" placeholder="Fecha de Nacimiento" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Asistente.fecha" v-mask="'##/##/####'" type="text" placeholder="dia/mes/año" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-calendar-check"></i>
@@ -105,7 +113,7 @@
                         <p class="subtitle is-5">Planeacion</p>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Planeacion.dia" type="text" placeholder="Dia de Reunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Planeacion.dia" type="text" placeholder="Día de Réunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-calendar-check"></i>
@@ -123,7 +131,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Planeacion.anfitrion" type="text" placeholder="Nombre Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Planeacion.anfitrion" type="text" placeholder="Nombre Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="far fa-user"></i>
@@ -131,8 +139,9 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Telefono de Anfitrión:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="text" placeholder="Tel Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="text" v-mask="'(###) ###-####'" placeholder="(###) ###-####" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-phone"></i>
@@ -141,7 +150,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Planeacion.direccion" type="text" placeholder="Direccion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Planeacion.direccion" type="text" placeholder="Dirección" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-map-marker"></i>
@@ -163,7 +172,7 @@
                         <p class="subtitle is-5">Alcance</p>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Alcance.dia" type="text" placeholder="Dia de Reunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Alcance.dia" type="text" placeholder="Día de Réunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-calendar-check"></i>
@@ -189,8 +198,9 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Telefono de Anfitrión:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" placeholder="Tel Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" v-mask="'(###) ###-####'" placeholder="(###) ###-####" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-phone"></i>
@@ -199,7 +209,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Alcance.direccion" type="text" placeholder="Direccion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Alcance.direccion" type="text" placeholder="Dirección" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-map-marker"></i>
@@ -219,7 +229,7 @@
                 </div>
                 <div class="columns">
                     <div class="column is-3">
-                        <p class="title is-3 is-spaced">Metas</p>
+                        <p class="title is-3 is-spaced">Metas de Asistencia</p>
                         <div class="field">
                             <div class="control has-icons-left">
                                 <input class="input is-medium" v-model="Metas.planeacion" type="number" placeholder="Planeación" oninvalid="this.setCustomValidity('Campos Obligatorios')"
@@ -490,7 +500,7 @@ export default {
         SendEmail: function() {
             this.fillList();
             var vm = this;
-            emailjs.send("rcm1ens_gmail_com", "", { data: this.$data})
+            emailjs.send("rcm1ens_gmail_com", "formato_template", { data: this.$data})
                 .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                         vm.MailSent()
                     }, function(err) { console.log("FAILED. error=", err);

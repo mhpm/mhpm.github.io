@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueMask from 'v-mask'
+Vue.use(VueMask);
 
 Vue.config.productionTip = false
 
@@ -12,6 +14,8 @@ import Footer from "./components/Footer.vue";
 Vue.component('app-navbar', Navbar);
 Vue.component('app-footer', Footer);
 
+import { VueMaskDirective } from 'v-mask'
+Vue.directive('mask', VueMaskDirective);
 
 /* eslint-disable no-new */
 new Vue({
