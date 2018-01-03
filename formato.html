@@ -483,14 +483,14 @@
                 Miembro:{},
                 Celula:'',
                 Lider:{
-                    nombre:'',
+                    nombre:' ',
                     telefono:'',
                     email:'',
                     fecha:''
                 },
                 Asistente:{
                     nombre:'',
-                    tel:'',
+                    telefono:'',
                     email:'',
                     fecha:''
                 },
@@ -521,7 +521,12 @@
                     amigosE:'',
                     bautismos:''
                 },
-                Miembros:[],
+                Miembros:[
+                    {nombre:'julio', bautismo:'293293', estadoCivil:'Soltero', espirituSanto:true, direccion: 'conocida', telefono:'02342342' },
+                    {nombre:'julio', bautismo:'293293', estadoCivil:'Soltero', espirituSanto:true, direccion: 'conocida', telefono:'02342342' },
+                    {nombre:'julio', bautismo:'293293', estadoCivil:'Soltero', espirituSanto:true, direccion: 'conocida', telefono:'02342342' },
+                    {nombre:'julio', bautismo:'293293', estadoCivil:'Soltero', espirituSanto:true, direccion: 'conocida', telefono:'02342342' }
+                ],
                 modalActive: false,
                 modalColor: 'is-warning',
                 status: "Enviando Reporte...",
@@ -531,7 +536,15 @@
                 SendEmail: function() {
                     var vm = this;
                     vm.modalActive = true;
-                    emailjs.send("michelleeepm_gmail_com", "formato_template", { data: vm.$data })
+                    emailjs.send("rcm1ens_gmail_com", "formato_template", { 
+                            Celula: this.Celula,
+                            Lider: this.Lider,
+                            Asis: this.Asistente,
+                            Plan: this.Planeacion,
+                            Alc: this.Alcance,
+                            Metas: this.Metas,
+                            Miembros: this.Miembros
+                        })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                                 vm.MailSent()
                             }, function(err) { console.log("FAILED. error=", err);

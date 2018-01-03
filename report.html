@@ -390,7 +390,9 @@
                 SendEmail: function() {
                     var vm = this;
                     vm.modalActive = true;
-                    emailjs.send("michelleeepm_gmail_com", "rcm_template", { data: vm.$data})
+                    emailjs.send("rcm1ens_gmail_com", "rcm_template", { 
+                            data: vm.$data
+                        })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                             vm.MailSent()
                         }, function(err) { console.log("FAILED. error=", err);
