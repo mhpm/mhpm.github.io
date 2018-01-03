@@ -62,7 +62,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Lider.telefono" type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Lider.telefono" type="number" placeholder="Teléfono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -528,7 +528,6 @@
                 msg: "Espere por favor"
             },
             created:function(){
-                PureMask.format(".date", true);
             },
             methods:{
                 SendEmail: function() {
