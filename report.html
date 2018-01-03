@@ -20,58 +20,14 @@
     </script>
 </head>
 <body>
-    <nav id="navbar" class="navbar is-light">
-        <div class="navbar-brand">
-            <a href="#" class="navbar-item">
-                <img src="img/logo4.png">
-            </a>
-            <div class="navbar-burger burger" data-target="navbarItems">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <div id="navbarItems" class="navbar-menu">
-            <div class="navbar-start">
-                   <a href="report.html" class="navbar-item has-text-dark">Reporte Semanal</a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link has-text-dark">
-                        Formatos
-                    </a>
-                    <div class="navbar-dropdown is-boxed">
-                        <a href="formato.html" class="navbar-item has-text-dark">Cuatrimestral</a>
-                        <hr class="divider">
-                        <a class="navbar-item has-text-primary">
-                            Version 1.0
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="field is-grouped is-grouped-centered">
-                        <p class="control">
-                            <a class="button is-primary" v-on:click="LogOut">
-                                <span class="icon">
-                                    <i class="fa fa-sign-out-alt"></i>
-                                </span>
-                                <span>Cerrar Sesion</span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <div id="root">
+        <app-nav></app-nav>
         <div class="hero-body">
             <div class="container">
                 <div class="notification is-primary">
                     <h1 class="title is-h1 has-text-centered">REPORTE SEMANAL</h1>
                 </div>   
-                <form id="myForm" v-on:submit="SendEmail">
+                <form v-on:submit.prevent="SendEmail">
                     <div class="columns">
                         <div class="column">
                             <h1 class="title">Reporte Semanal</h1>
@@ -354,7 +310,7 @@
 
                             <div class="field is-grouped is-grouped-centered">
                                 <div class="control">
-                                    <input class="button is-primary is-medium" type="submit" value="Enviar" :disabled="total == 0">
+                                    <input class="button is-primary is-medium" type="submit" value="Enviar">
                                 </div>
                             </div>
                         </div>
@@ -376,19 +332,9 @@
                 <button v-on:click="CloseModal" class="modal-close is-large" aria-label="close"></button>
             </div>
         </div>
+        <app-foot></app-foot>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="content has-text-centered">
-                <strong>IGLESIA APOSTOLICA DE LA FE EN CRISTO JESUS</strong>
-                <br>Desarrollado por:
-                <br><strong>Michelle Perez Morales</strong>
-                <br><a href="http://www.linkedin.com/in/michellepm">www.linkedin.com/in/michellepm</a>
-                <br>Copyright © 2017
-            </div>
-        </div>
-    </footer>
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -397,7 +343,8 @@
     <script src="js/datepicker.js" ></script>
     <script src="js/firebase.js"></script>
     <script src="js/vue.js"></script>
-    <script src="js/navbar.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
 
     <script>
         new Vue ({
@@ -443,7 +390,7 @@
                 SendEmail: function() {
                     var vm = this;
                     vm.modalActive = true;
-                    emailjs.send("rcm1ens_gmail_com", "rcm_template", { data: this.$data})
+                    emailjs.send("michelleeepm_gmail_com", "rcm_template", { data: vm.$data})
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                             vm.MailSent()
                         }, function(err) { console.log("FAILED. error=", err);
