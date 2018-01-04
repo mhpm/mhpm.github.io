@@ -4,7 +4,7 @@
             <div class="notification is-primary">
                 <h1 class="title is-h1 has-text-centered">DATOS GENERALES DE CELULA</h1>
             </div>
-            <form>
+            <form v-on:submit.prevent="SendEmail">
                 <div class="columns">
                     <div class="column">
                         <div class="field">
@@ -427,7 +427,7 @@
                 </div>
             </form>
             <div v-bind:class="{modal:true, 'is-active':modalActive}">
-            <div class="modal-background"></div>
+                <div class="modal-background"></div>
                 <div class="modal-content">
                     <section v-bind:class="['hero is-medium', modalColor]">
                         <div class="hero-body">
@@ -438,8 +438,8 @@
                         </div>
                     </section>
                 </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-        </div>
+                <button class="modal-close is-large" aria-label="close"></button>
+            </div>
         </div>
     </div>
 </template>
@@ -500,7 +500,15 @@ export default {
         SendEmail: function() {
             this.fillList();
             var vm = this;
-            emailjs.send("rcm1ens_gmail_com", "formato_template", { data: this.$data})
+            emailjs.send("rcm1ens_gmail_com", "formato_template", {
+                    Celula: this.Celula,
+                    Lider: this.Lider,
+                    Asis: this.Asistente,
+                    Plan: this.Planeacion,
+                    Alc: this.Alcance,
+                    Metas: this.Metas,
+                    Miembros: this.Miembros
+                })
                 .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                         vm.MailSent()
                     }, function(err) { console.log("FAILED. error=", err);
