@@ -5,8 +5,21 @@ import App from './App'
 import router from './router'
 import VueMask from 'v-mask'
 Vue.use(VueMask);
-
 Vue.config.productionTip = false
+
+// Firebase Config and init
+import firebase from 'firebase';
+var config = {
+  apiKey: "AIzaSyBxlRYB7OidiGaIAiIaIkNhjM-nUB5PQwE",
+  authDomain: "rcm-manager.firebaseapp.com",
+  databaseURL: "https://rcm-manager.firebaseio.com",
+  projectId: "rcm-manager",
+  storageBucket: "rcm-manager.appspot.com",
+  messagingSenderId: "456447116065"
+};
+firebase.initializeApp(config)
+// end Firebase
+
 
 // ImportingGlobal Components
 import Navbar from "./components/Navbar.vue";
