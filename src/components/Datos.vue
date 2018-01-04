@@ -230,9 +230,10 @@
                 <div class="columns">
                     <div class="column is-3">
                         <p class="title is-3 is-spaced">Metas de Asistencia</p>
+                        <p class="subtitle is-6">Bautizados</p>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.planeacion" type="number" placeholder="Planeación" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Metas.planeacion" type="number" placeholder="Réunion de Planeación" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fab fa-slack-hash"></i>
@@ -241,7 +242,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.miercoles" type="number" placeholder="Culto Miercoles" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Metas.alcance" type="number" placeholder="Réunion de Alcance" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fab fa-slack-hash"></i>
@@ -250,7 +251,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.alcance" type="number" placeholder="Reunion de Alcanze" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Metas.miercoles" type="number" placeholder="Culto Miércoles" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fab fa-slack-hash"></i>
@@ -259,7 +260,17 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.amigosR" type="number" placeholder="Amigos en Reunión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Metas.domingo" type="number" placeholder="Culto Domíngo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    oninput="setCustomValidity('')" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fab fa-slack-hash"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="subtitle is-6">Amigos</p>
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <input class="input is-medium" v-model="Metas.amigosA" type="number" placeholder="Anotados" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fab fa-slack-hash"></i>
@@ -268,7 +279,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.domingo" type="number" placeholder="Culto Domingo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Metas.amigosR" type="number" placeholder="Réunion de Alcance" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fab fa-slack-hash"></i>
@@ -277,7 +288,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.amigosA" type="number" placeholder="Amigos Anotados" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Metas.amigosF" type="number" placeholder="Fiesta del Amigo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fab fa-slack-hash"></i>
@@ -286,16 +297,7 @@
                         </div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.amigosF" type="number" placeholder="Amigos a Fiesta" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-                                    oninput="setCustomValidity('')" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fab fa-slack-hash"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Metas.amigosE" type="number" placeholder="Amigos a Encuentro" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Metas.amigosE" type="number" placeholder="Encuentro" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fab fa-slack-hash"></i>
