@@ -20,7 +20,6 @@ var config = {
 firebase.initializeApp(config)
 // end Firebase
 
-
 // ImportingGlobal Components
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";

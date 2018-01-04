@@ -130,8 +130,9 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Anfitrión:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Planeacion.anfitrion" type="text" placeholder="Nombre Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Planeacion.anfitrion" type="text" placeholder="Nombre Completo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="far fa-user"></i>
@@ -139,9 +140,8 @@
                             </div>
                         </div>
                         <div class="field">
-                            <p>Telefono de Anfitrión:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="text" v-mask="'(###) ###-####'" placeholder="(###) ###-####" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="text" v-mask="'(###) ###-####'" placeholder="Teléfono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-phone"></i>
@@ -189,8 +189,9 @@
                             </div>
                         </div>
                         <div class="field">
+                            <p>Anfitrión:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Alcance.anfitrion" type="text" placeholder="Nombre Anfitrion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Alcance.anfitrion" type="text" placeholder="Nombre Completo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="far fa-user"></i>
@@ -198,9 +199,8 @@
                             </div>
                         </div>
                         <div class="field">
-                            <p>Telefono de Anfitrión:</p>
                             <div class="control has-icons-left">
-                                <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" v-mask="'(###) ###-####'" placeholder="(###) ###-####" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" v-mask="'(###) ###-####'" placeholder="Teléfono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                     oninput="setCustomValidity('')" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-phone"></i>
@@ -329,7 +329,7 @@
                                     <div class="column">
                                         <div class="field">
                                             <div class="control">
-                                                <input type="text" v-model="Miembro.bautismo" placeholder="Fecha Bautismo" class="input is-normal">
+                                                <input type="text" v-model="Miembro.bautismo" v-mask="'##/##/####'" placeholder="Fecha Bautismo" class="input is-normal">
                                             </div>
                                         </div>
                                     </div>
@@ -379,7 +379,7 @@
                                 <div class="column">
                                     <div class="field">
                                         <div class="control">
-                                            <input type="text" v-model="m.bautismo" placeholder="Fecha Bautismo" class="input is-normal">
+                                            <input type="text" v-model="m.bautismo" v-mask="'##/##/####'" placeholder="Fecha Bautismo" class="input is-normal">
                                         </div>
                                     </div>
                                 </div>
