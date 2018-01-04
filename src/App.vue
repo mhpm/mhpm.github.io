@@ -2,7 +2,7 @@
 <div>
   <app-navbar v-if="$route.path != '/'"></app-navbar>
   <router-view></router-view>
-  <app-footer></app-footer>
+  <app-footer v-if="$route.path != '/'"></app-footer>
 </div>
 </template>
 

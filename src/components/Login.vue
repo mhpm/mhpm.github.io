@@ -1,5 +1,4 @@
 <template>
-<div>
     <section id="loginForm" class="section is-vertical-center">
         <div class="container">
             <div class="columns">
@@ -53,7 +52,6 @@
             </div>
         </div>
     </section>
-</div>
 </template>
 <script>
 export default {

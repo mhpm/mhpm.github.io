@@ -4,7 +4,7 @@
             <div class="notification is-primary">
                 <h1 class="title is-h1 has-text-centered">REPORTE SEMANAL</h1>
             </div>   
-            <form id="myForm" v-on:submit="SendEmail">
+            <form v-on:submit.prevent="SendEmail">
                 <div class="columns">
                     <div class="column">
                         <h1 class="title">Reporte Semanal</h1>
