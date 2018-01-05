@@ -1,9 +1,9 @@
 var config = {
-    apiKey: "AIzaSyBxlRYB7OidiGaIAiIaIkNhjM-nUB5PQwE",
-    authDomain: "rcm-manager.firebaseapp.com",
-    databaseURL: "https://rcm-manager.firebaseio.com",
-    projectId: "rcm-manager",
-    storageBucket: "rcm-manager.appspot.com",
-    messagingSenderId: "456447116065"
-};
-firebase.initializeApp(config);
+    apiKey: "AIzaSyBGg2g1nVFt2-e5zWJQ-2mnciGQIcU8GJw",
+    authDomain: "managercm-b2ac2.firebaseapp.com",
+    databaseURL: "https://managercm-b2ac2.firebaseio.com",
+    projectId: "managercm-b2ac2",
+    storageBucket: "managercm-b2ac2.appspot.com",
+    messagingSenderId: "714146551665"
+  };
+  firebase.initializeApp(config);

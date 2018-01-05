@@ -480,6 +480,7 @@
         new Vue ({
             el:'#root',
             data: {
+                email:'',
                 Miembro:{},
                 Celula:'',
                 Lider:{
@@ -525,15 +526,23 @@
                 modalActive: false,
                 modalColor: 'is-warning',
                 status: "Enviando Reporte...",
-                msg: "Espere por favor"
+                msg: "Espere por favor",
+                sent: false
             },
             created:function(){
+                var vm = this;
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        vm.email = user.email;
+                    } 
+                });
             },
             methods:{
                 SendEmail: function() {
                     var vm = this;
                     vm.modalActive = true;
-                    emailjs.send("rcm1ens_gmail_com", "formato_template", { 
+                    emailjs.send("rcmcontrol", "reporte_template", {
+                            Email: this.email,
                             Celula: this.Celula,
                             Lider: this.Lider,
                             Asis: this.Asistente,
@@ -566,12 +575,14 @@
                     this.status = "Reporte Enviado!";
                     this.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
                     this.modalColor = 'is-primary';
+                    this.sent = true;
                 },
                 CloseModal: function(){
                     this.modalActive = false;
                     this.status = 'Enviando Reporte...';
                     this.msg = 'Espere por favor';
                     this.modalColor = 'is-warning';
+                    if(this.sent){ location.reload(); }
                 },
                 clearMiembro: function(){
                     this.Miembro.nombre = '';

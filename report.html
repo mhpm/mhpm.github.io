@@ -350,6 +350,7 @@
         new Vue ({
             el:'#root',
             data:{
+                email:'',
                 celula: "",
                 lider: "",
                 asistente: "",
@@ -374,7 +375,16 @@
                 modalActive: false,
                 modalColor: 'is-warning',
                 status: "Enviando Reporte...",
-                msg: "Espere por favor"
+                msg: "Espere por favor",
+                sent: false
+            },
+            created: function(){
+                var vm = this;
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        vm.email = user.email;
+                    } 
+                });
             },
             mounted: function() {
                 var vm = this;
@@ -390,7 +400,7 @@
                 SendEmail: function() {
                     var vm = this;
                     vm.modalActive = true;
-                    emailjs.send("rcm1ens_gmail_com", "rcm_template", { 
+                    emailjs.send("rcmcontrol", "reporte_semanal", { 
                             data: vm.$data
                         })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
@@ -418,12 +428,14 @@
                     this.status = "Reporte Enviado!";
                     this.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
                     this.modalColor = 'is-primary';
+                    this.sent = true;
                 },
                 CloseModal: function(){
                     this.modalActive = false;
                     this.status = 'Enviando Reporte...';
                     this.msg = 'Espere por favor';
                     this.modalColor = 'is-warning';
+                    if(this.sent){ location.reload(); }
                 },
                 Clean: function() {
                     this.bautizados = "";
