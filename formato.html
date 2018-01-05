@@ -101,7 +101,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Asistente.telefono" type="text" placeholder="Teléfono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Asistente.telefono" type="number" placeholder="Teléfono" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -541,7 +541,7 @@
                 SendEmail: function() {
                     var vm = this;
                     vm.modalActive = true;
-                    emailjs.send("rcmcontrol", "reporte_template", {
+                    emailjs.send("rcmcontrol", "formato_template", {
                             Email: this.email,
                             Celula: this.Celula,
                             Lider: this.Lider,
