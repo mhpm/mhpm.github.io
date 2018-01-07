@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "managercm-b2ac2"
+    "default": "managercm-b2ac2",
+    "rcm": "manage-rcm"
   }
 }
