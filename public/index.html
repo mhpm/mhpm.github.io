@@ -36,7 +36,7 @@
             <div class="container">
                 <div class="columns">
                     <div class="column is-6">
-                        <form>
+                        <form v-on:submit.prevent="Login(email, password)">
                             <div class="field is-grouped is-grouped-centered">
                                     <figure class="image">
                                         <img width="20" src="img/logo4.png">
@@ -76,7 +76,7 @@
                             </div>
                             <div class="field is-grouped is-grouped-centered">
                                 <p class="control">
-                                    <input type="button" v-on:click="Login(email, password)" class="button is-primary is-medium" value="Entrar"/>
+                                    <input type="submit" class="button is-primary is-medium" value="Entrar"/>
                                 </p>
                             </div>
                         </form>
