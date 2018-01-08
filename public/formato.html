@@ -192,11 +192,7 @@
                             <p class="subtitle is-5">Alcance</p>
                             <div class="field">
                                 <div class="control has-icons-left">
-<<<<<<< HEAD:formato.html
-                                    <input class="input is-medium" v-model="Alcance.dia" type="text" placeholder="Día de Réunion" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-=======
                                     <input class="input is-medium" v-model="Alcance.dia" type="text" placeholder="Día de Reunión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
->>>>>>> Fire:public/formato.html
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-calendar-check"></i>
@@ -223,11 +219,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-<<<<<<< HEAD:formato.html
-                                    <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-=======
                                     <input class="input is-medium" v-model="Alcance.telAnfitrion" type="number" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
->>>>>>> Fire:public/formato.html
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -260,11 +252,7 @@
                             <p class="subtitle is-6">Bautizados</p>
                             <div class="field">
                                 <div class="control has-icons-left">
-<<<<<<< HEAD:formato.html
-                                    <input class="input is-medium" v-model="Metas.planeacion" type="number" placeholder="Réunion de Planeación" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-=======
                                     <input class="input is-medium" v-model="Metas.planeacion" type="number" placeholder="Reunión de Planeación" oninvalid="this.setCustomValidity('Campos Obligatorios')"
->>>>>>> Fire:public/formato.html
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fab fa-slack-hash"></i>
@@ -273,11 +261,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-<<<<<<< HEAD:formato.html
-                                    <input class="input is-medium" v-model="Metas.alcance" type="number" placeholder="Réunion de Alcance" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-=======
                                     <input class="input is-medium" v-model="Metas.alcance" type="number" placeholder="Reunión de Alcance" oninvalid="this.setCustomValidity('Campos Obligatorios')"
->>>>>>> Fire:public/formato.html
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fab fa-slack-hash"></i>
@@ -295,11 +279,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-<<<<<<< HEAD:formato.html
-                                    <input class="input is-medium" v-model="Metas.domingo" type="number" placeholder="Culto Domíngo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-=======
                                     <input class="input is-medium" v-model="Metas.domingo" type="number" placeholder="Culto Domingo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
->>>>>>> Fire:public/formato.html
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fab fa-slack-hash"></i>
@@ -318,11 +298,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-<<<<<<< HEAD:formato.html
-                                    <input class="input is-medium" v-model="Metas.amigosR" type="number" placeholder="Réunion de Alcance" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-=======
                                     <input class="input is-medium" v-model="Metas.amigosR" type="number" placeholder="Reunión de Alcance" oninvalid="this.setCustomValidity('Campos Obligatorios')"
->>>>>>> Fire:public/formato.html
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fab fa-slack-hash"></i>
@@ -554,12 +530,8 @@
                 modalColor: 'is-warning',
                 status: "Enviando Reporte...",
                 msg: "Espere por favor",
-<<<<<<< HEAD:formato.html
-                sent: false
-=======
                 sent: false,
                 db:''
->>>>>>> Fire:public/formato.html
             },
             created:function(){
                 var vm = this;
@@ -568,10 +540,7 @@
                         vm.email = user.email;
                     } 
                 });
-<<<<<<< HEAD:formato.html
-=======
                 this.db = firebase.firestore();
->>>>>>> Fire:public/formato.html
             },
             methods:{
                 SendEmail: function() {
