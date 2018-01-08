@@ -32,7 +32,7 @@ Vue.component('app-nav', {
                     <div class="navbar-item">
                         <div class="field is-grouped is-grouped-centered">
                             <p class="control">
-                                <a class="button is-primary" v-on:click="LogOut">
+                                <a class="button is-danger" v-on:click="LogOut">
                                     <span class="icon">
                                         <i class="fa fa-sign-out-alt"></i>
                                     </span>

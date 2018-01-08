@@ -3,11 +3,8 @@ Vue.component('app-foot', {
         `<footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
-                <strong>IGLESIA APOSTOLICA DE LA FE EN CRISTO JESUS</strong>
-                <br>Desarrollado por:
-                <br><strong>Michelle Perez Morales</strong>
-                <br><a href="http://www.linkedin.com/in/michellepm">www.linkedin.com/in/michellepm</a>
-                <br>Copyright © 2017
+                Desarrollado por: Michelle Perez Morales<br>
+                <b>ManageRCM</b> Copyright © 2018
             </div>
         </div>
     </footer>`

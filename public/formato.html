@@ -161,7 +161,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="text" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Planeacion.telAnfitrion" type="number" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -219,7 +219,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Alcance.telAnfitrion" type="text" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                    <input class="input is-medium" v-model="Alcance.telAnfitrion" type="number" placeholder="Tel Anfitrión" oninvalid="this.setCustomValidity('Campos Obligatorios')"
                                         oninput="setCustomValidity('')" required>
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-phone"></i>
@@ -469,8 +469,11 @@
     
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
     <script src="js/firebase.js"></script>
     <script src="js/vue.js"></script>
     <script src="components/navbar.js"></script>
@@ -527,7 +530,8 @@
                 modalColor: 'is-warning',
                 status: "Enviando Reporte...",
                 msg: "Espere por favor",
-                sent: false
+                sent: false,
+                db:''
             },
             created:function(){
                 var vm = this;
@@ -536,6 +540,7 @@
                         vm.email = user.email;
                     } 
                 });
+                this.db = firebase.firestore();
             },
             methods:{
                 SendEmail: function() {
@@ -552,10 +557,29 @@
                             Miembros: this.Miembros
                         })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
+                                vm.SaveData()
                                 vm.MailSent()
                             }, function(err) { console.log("FAILED. error=", err);
                                 vm.MailFail()
                         });
+                },
+                SaveData: function(){
+                    var vm = this
+                    vm.IgleRef = this.db.collection('Iglesias').doc(vm.email).collection('Celulas').doc(this.Celula);
+                    vm.temp = { 
+                        Lider: this.Lider,
+                        Asistente: this.Asistente,
+                        Planeacion: this.Planeacion,
+                        Alcance: this.Alcance,
+                        Metas: this.Metas,
+                        Miembros: this.Miembros
+                    };
+                    this.IgleRef.set(vm.temp).then(function () {
+                        console.log('status saved');
+                    }).catch(function (erro) {
+                        console.log('Got Erro');
+                        console.log(erro);
+                    });
                 },
                 AddRow: function(m, list) {
                     list.push({nombre: m.nombre, bautismo: m.bautismo, estadoCivil: m.estadoCivil, espirituSanto: m.espirituSanto, direccion: m.direccion, telefono: m.telefono});
