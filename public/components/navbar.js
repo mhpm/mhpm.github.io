@@ -22,7 +22,7 @@ Vue.component('app-nav', {
                             <a href="formato.html" class="navbar-item has-text-dark">Cuatrimestral</a>
                             <hr class="divider">
                             <a class="navbar-item has-text-primary">
-                                Version 1.0
+                                Version 1.3
                             </a>
                         </div>
                     </div>

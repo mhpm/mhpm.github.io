@@ -335,7 +335,7 @@
                         </div>
                         <div class="column is-9">
                             <div class="columns">
-                                <div class="column">     
+                                <div class="column" v-if="Metas.planeacion > 0">     
                                     <p class="title is-spaced">Miembros: {{Miembros.length}}</p>
                                     <p class="subtitle is-6">Comprometidos en el Ciclo</p>
                                     <div class="columns">
@@ -382,7 +382,7 @@
                                             </div>
                                         </div>
                                         <div class="column">
-                                            <a class="tag is-success is-medium" v-on:click="AddRow(Miembro, Miembros)">Agregar</a>
+                                            <a class="tag is-success is-medium" v-on:click="AddRow(Miembro, Miembros)" v-if="Miembro.nombre != ''">Agregar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -440,9 +440,12 @@
                     </div>
                     <div class="columns">
                         <div class="column">
+                                <div class="notification is-warning" v-if="Miembros.length < Metas.planeacion">
+                                    <p class="title has-text-centered">No olvides registrar tus miembros comprometidos</p>
+                                </div>
                             <div class="field is-grouped is-grouped-centered">
                                 <div class="control">
-                                    <input class="button is-primary is-medium" type="submit" value="Enviar">
+                                    <input class="button is-primary is-medium" type="submit" value="Enviar" :disabled="Miembros.length < Metas.planeacion">
                                 </div>
                             </div>
                         </div>
@@ -484,7 +487,7 @@
             el:'#root',
             data: {
                 email:'',
-                Miembro:{},
+                Miembro:{ nombre:''},
                 Celula:'',
                 Lider:{
                     nombre:'',
@@ -609,7 +612,6 @@
                     if(this.sent){ location.reload(); }
                 },
                 clearMiembro: function(){
-                    this.Miembro.nombre = '';
                     this.Miembro.nombre = '';
                     this.Miembro.bautismo = '';
                     this.Miembro.estadoCivil = '';

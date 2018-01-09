@@ -171,7 +171,7 @@
                                     <input class="input" v-model="bautizados" type="text" placeholder="Nombre completo">
                                 </div>
                                 <div class="control">
-                                    <a class="button is-primary" v-on:click="AddRow(bautizados, bauRows)">
+                                    <a class="button is-primary" v-on:click="AddRow(bautizados, bauRows)" v-if="bautizados != ''">
                                         Agregar
                                     </a>
                                 </div>
@@ -199,7 +199,7 @@
                                     <input class="input" v-model="amigos" type="text" placeholder="Nombre completo">
                                 </div>
                                 <div class="control">
-                                    <a class="button is-primary" v-on:click="AddRow(amigos, amiRows)">
+                                    <a class="button is-primary" v-on:click="AddRow(amigos, amiRows)" v-if="amigos != ''">
                                         Agregar
                                     </a>
                                 </div>
@@ -227,7 +227,7 @@
                                     <input class="input" v-model="ninos" type="text" placeholder="Nombre completo">
                                 </div>
                                 <div class="control">
-                                    <a class="button is-primary" v-on:click="AddRow(ninos, ninRows)">
+                                    <a class="button is-primary" v-on:click="AddRow(ninos, ninRows)" v-if="ninos != ''">
                                         Agregar
                                     </a>
                                 </div>
@@ -255,7 +255,7 @@
                                     <input class="input" v-model="inter" type="text" placeholder="Nombre completo">
                                 </div>
                                 <div class="control">
-                                    <a class="button is-primary" v-on:click="AddRow(inter, intRows)">
+                                    <a class="button is-primary" v-on:click="AddRow(inter, intRows)" v-if="inter != ''">
                                         Agregar
                                     </a>
                                 </div>
@@ -351,21 +351,21 @@
             el:'#root',
             data:{
                 email:'',
-                celula: "",
-                lider: "",
-                asistente: "",
-                cgrupo: "Mixto",
-                tema: "1 - La palabra fuente de vida",
-                lugar: "",
-                dia: "",
-                verbo: "1 - Orar",
-                obs: "",
-                bautizados: "",
-                amigos: "",
-                ninos: "",
-                inter: "",
-                ofrenda: "",
-                elaborado: "",
+                celula: '',
+                lider: '',
+                asistente: '',
+                cgrupo: 'Mixto',
+                tema: '1 - La palabra fuente de vida',
+                lugar: '',
+                dia: '',
+                verbo: '1 - Orar',
+                obs: '',
+                bautizados: '',
+                amigos: '',
+                ninos: '',
+                inter: '',
+                ofrenda: '',
+                elaborado: '',
                 submitted: false,
                 bauRows: [],
                 amiRows: [],
@@ -374,8 +374,8 @@
                 total: 0,
                 modalActive: false,
                 modalColor: 'is-warning',
-                status: "Enviando Reporte...",
-                msg: "Espere por favor",
+                status: 'Enviando Reporte...',
+                msg: 'Espere por favor',
                 sent: false
             },
             created: function(){
@@ -418,15 +418,15 @@
                     this.Clean();
                 },
                 MailFail: function() {
-                    this.status = "Envío Fallido";
-                    this.msg = "Revisa tu conexión a internet ó intentalo mas tarde!";
+                    this.status = 'Envío Fallido';
+                    this.msg = 'Revisa tu conexión a internet ó intentalo mas tarde!';
                     this.modalColor = 'is-danger';
                     this.exc = false;
                     this.check = true;
                 },
                 MailSent: function() {
-                    this.status = "Reporte Enviado!";
-                    this.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
+                    this.status = 'Reporte Enviado!';
+                    this.msg = 'Gracias por cumplir a tiempo, Dios te bendiga!';
                     this.modalColor = 'is-primary';
                     this.sent = true;
                 },
@@ -438,10 +438,10 @@
                     if(this.sent){ location.reload(); }
                 },
                 Clean: function() {
-                    this.bautizados = "";
-                    this.amigos = "";
-                    this.ninos = "";
-                    this.inter = "";
+                    this.bautizados = '';
+                    this.amigos = '';
+                    this.ninos = '';
+                    this.inter = '';
                     this.total = this.bauRows.length + this.amiRows.length + this.ninRows.length + this.intRows.length;
                 }
             }
