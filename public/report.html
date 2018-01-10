@@ -27,7 +27,7 @@
                 <div class="notification is-primary">
                     <h1 class="title is-h1 has-text-centered">REPORTE SEMANAL</h1>
                 </div>   
-                <form v-on:submit.prevent="SendEmail">
+                <form v-on:submit.prevent="LoadData">
                     <div class="columns">
                         <div class="column">
                             <h1 class="title">Reporte Semanal</h1>
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
 
-                            <div class="field">
+                            <!-- <div class="field">
                                 <label class="label">Líder</label>
                                 <div class="control has-icons-left">
                                     <input class="input is-medium" v-model="lider" type="text" placeholder="Nombre completo" oninvalid="this.setCustomValidity('Campos Obligatorios')"
@@ -109,7 +109,7 @@
                                         <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="field">
                                 <label class="label">Tema Impartido</label>
@@ -277,11 +277,32 @@
                                 </table>
                             </div>
 
-                            <div class="field">
-                                <label class="label">Observaciones</label>
+                            <h5 class="title is-5">Observaciones, Total: {{obsRows.length}}</h5>
+                            <div class="field has-addons">
                                 <div class="control">
-                                    <textarea class="textarea" v-model="obs"></textarea>
+                                    <input class="input" v-model="obs" type="text" placeholder="Nombre completo">
                                 </div>
+                                <div class="control">
+                                    <a class="button is-primary" v-on:click="AddRow(obs, obsRows)" v-if="obs != ''">
+                                        Agregar
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <table class="table is-fullwidth">
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr v-for="row, index in obsRows">
+                                        <td>
+                                            <label class="label">{{row.name}}</label>
+                                        </td>
+                                        <td>
+                                            <a class="tag is-danger" v-on:click="removeRow(index, obsRows)">Quitar</a>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -337,8 +358,10 @@
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/datepicker.js" ></script>
     <script src="js/firebase.js"></script>
@@ -371,12 +394,15 @@
                 amiRows: [],
                 ninRows: [],
                 intRows: [],
+                obsRows: [],
                 total: 0,
                 modalActive: false,
                 modalColor: 'is-warning',
                 status: 'Enviando Reporte...',
                 msg: 'Espere por favor',
-                sent: false
+                sent: false,
+                db:'',
+                celulaData:''
             },
             created: function(){
                 var vm = this;
@@ -385,6 +411,7 @@
                         vm.email = user.email;
                     } 
                 });
+                this.db = firebase.firestore();
             },
             mounted: function() {
                 var vm = this;
@@ -400,14 +427,69 @@
                 SendEmail: function() {
                     var vm = this;
                     vm.modalActive = true;
-                    emailjs.send("rcmcontrol", "reporte_semanal", { 
-                            data: vm.$data
+                    emailjs.send("rcmcontrol", "reporte_semanal", {
+                            Celula: vm.celula,
+                            Lider: vm.lider,
+                            Asistente: vm.asistente,
+                            Verbo: vm.verbo,
+                            Tema: vm.tema,
+                            Lugar: vm.lugar,
+                            Dia: vm.dia,
+                            BauRows: vm.bauRows,
+                            AmiRows: vm.amiRows,
+                            NinRows: vm.ninRows,
+                            IntRows: vm.intRows,
+                            ObsRows: vm.obsRows,
+                            Total: vm.total,
+                            Ofrenda: vm.ofrenda,
+                            Elaborado: vm.elaborado,
+                            Email: vm.email
                         })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                             vm.MailSent()
+                            vm.SaveData()
                         }, function(err) { console.log("FAILED. error=", err);
                             vm.MailFail()
                         });
+                },
+                SaveData: function(){
+                    var vm = this
+                    vm.celulaData.Reportes.push({
+                        vervo: vm.verbo,
+                        tema: vm.tema,
+                        direccion: vm.lugar,
+                        dia: vm.dia,
+                        bautizados: vm.bauRows.length,
+                        amigos: vm.amiRows.length,
+                        ninos: vm.ninRows.length,
+                        intermedios: vm.intRows.length,
+                        observaciones: vm.obsRows.length,
+                        ofrenda: vm.ofrenda,
+                        elavorado: vm.elaborado
+                    });
+
+                    this.CelRef.set(vm.celulaData).then(function () {
+                        console.log('status saved');
+                    }).catch(function (erro) {
+                        console.log('Got Erro');
+                        console.log(erro);
+                    });
+                },
+                LoadData: function () {
+                    var vm = this
+                    vm.CelRef = vm.db.collection("Iglesias").doc(vm.email).collection("Celulas").doc(vm.celula);
+                    vm.CelRef.get().then(function(doc){
+                        if(doc.exists){
+                            vm.celulaData = doc.data();
+                        }else{
+                            console.log('Document not Exists');
+                        }
+                    });
+                    setTimeout(function(){
+                        vm.lider = vm.celulaData.Lider.nombre;
+                        vm.asistente = vm.celulaData.Asistente.nombre;
+                        vm.SendEmail();
+                    }, 1000);
                 },
                 AddRow: function(name, list) {
                     list.push({ name: name});
@@ -442,7 +524,8 @@
                     this.amigos = '';
                     this.ninos = '';
                     this.inter = '';
-                    this.total = this.bauRows.length + this.amiRows.length + this.ninRows.length + this.intRows.length;
+                    this.obs = '';
+                    this.total = this.bauRows.length + this.amiRows.length + this.ninRows.length + this.intRows.length + this.obsRows.length;
                 }
             }
         })

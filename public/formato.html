@@ -529,6 +529,7 @@
                     bautismos:''
                 },
                 Miembros:[],
+                Reportes:[],
                 modalActive: false,
                 modalColor: 'is-warning',
                 status: "Enviando Reporte...",
@@ -550,14 +551,14 @@
                     var vm = this;
                     vm.modalActive = true;
                     emailjs.send("rcmcontrol", "formato_template", {
-                            Email: this.email,
-                            Celula: this.Celula,
-                            Lider: this.Lider,
-                            Asis: this.Asistente,
-                            Plan: this.Planeacion,
-                            Alc: this.Alcance,
-                            Metas: this.Metas,
-                            Miembros: this.Miembros
+                            Email: vm.email,
+                            Celula: vm.Celula,
+                            Lider: vm.Lider,
+                            Asis: vm.Asistente,
+                            Plan: vm.Planeacion,
+                            Alc: vm.Alcance,
+                            Metas: vm.Metas,
+                            Miembros: vm.Miembros
                         })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                                 vm.SaveData()
@@ -568,16 +569,17 @@
                 },
                 SaveData: function(){
                     var vm = this
-                    vm.IgleRef = this.db.collection('Iglesias').doc(vm.email).collection('Celulas').doc(this.Celula);
-                    vm.temp = { 
-                        Lider: this.Lider,
-                        Asistente: this.Asistente,
-                        Planeacion: this.Planeacion,
-                        Alcance: this.Alcance,
-                        Metas: this.Metas,
-                        Miembros: this.Miembros
+                    vm.IgleRef = vm.db.collection('Iglesias').doc(vm.email).collection('Celulas').doc(vm.Celula);
+                    vm.temp = {
+                        Lider: vm.Lider,
+                        Asistente: vm.Asistente,
+                        Planeacion: vm.Planeacion,
+                        Alcance: vm.Alcance,
+                        Metas: vm.Metas,
+                        Miembros: vm.Miembros,
+                        Reportes: vm.Reportes 
                     };
-                    this.IgleRef.set(vm.temp).then(function () {
+                    vm.IgleRef.set(vm.temp).then(function () {
                         console.log('status saved');
                     }).catch(function (erro) {
                         console.log('Got Erro');
