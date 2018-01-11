@@ -47,6 +47,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="column">
+                            <div class="field">
+                                <p class="title is-3 is-spaced">&nbsp;</p>
+                                <p class="subtitle is-5">Clasificación del Grupo</p>
+                                <div class="control has-icons-left">
+                                    <div class="select">
+                                        <select v-model="Cgrupo">
+                                            <option>Mixto</option>
+                                            <option>Mujeres</option>
+                                            <option>Hombres</option>
+                                            <option>Jovenes</option>
+                                        </select>
+                                    </div>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-users"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="columns">
                         <div class="column">
@@ -71,8 +90,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Lider.email" type="text" placeholder="Email" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-                                        oninput="setCustomValidity('')" required>
+                                    <input class="input is-medium" v-model="Lider.email" type="text" placeholder="Email">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-envelope"></i>
                                     </span>
@@ -81,7 +99,7 @@
                             <div class="field">
                                 <div class="control has-icons-left">
                                     <input class="input is-medium" v-model="Lider.fecha" type="text" placeholder="Fecha de Nacimiento día/mes/año" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-                                        oninput="setCustomValidity('')"  required>
+                                        oninput="setCustomValidity('')">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-calendar-check"></i>
                                     </span>
@@ -110,8 +128,7 @@
                             </div>
                             <div class="field">
                                 <div class="control has-icons-left">
-                                    <input class="input is-medium" v-model="Asistente.email" type="text" placeholder="Email" oninvalid="this.setCustomValidity('Campos Obligatorios')"
-                                        oninput="setCustomValidity('')" required>
+                                    <input class="input is-medium" v-model="Asistente.email" type="text" placeholder="Email">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-envelope"></i>
                                     </span>
@@ -487,8 +504,16 @@
             el:'#root',
             data: {
                 email:'',
-                Miembro:{ nombre:''},
+                Miembro:{
+                    nombre:'',
+                    bautismo:'',
+                    estadoCivil:'',
+                    espirituSanto:'',
+                    direccion:'',
+                    telefono:''
+                },
                 Celula:'',
+                Cgrupo:'Mixto',
                 Lider:{
                     nombre:'',
                     telefono:'',
@@ -553,6 +578,7 @@
                     emailjs.send("rcmcontrol", "formato_template", {
                             Email: vm.email,
                             Celula: vm.Celula,
+                            Cgrupo: vm.Cgrupo,
                             Lider: vm.Lider,
                             Asis: vm.Asistente,
                             Plan: vm.Planeacion,
@@ -561,25 +587,26 @@
                             Miembros: vm.Miembros
                         })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
-                                vm.SaveData()
-                                vm.MailSent()
+                                vm.MailSent();
+                                vm.SaveData();
                             }, function(err) { console.log("FAILED. error=", err);
-                                vm.MailFail()
+                                vm.MailFail();
                         });
                 },
                 SaveData: function(){
                     var vm = this
-                    vm.IgleRef = vm.db.collection('Iglesias').doc(vm.email).collection('Celulas').doc(vm.Celula);
                     vm.temp = {
+                        Cgrupo: vm.Cgrupo,
                         Lider: vm.Lider,
                         Asistente: vm.Asistente,
                         Planeacion: vm.Planeacion,
                         Alcance: vm.Alcance,
                         Metas: vm.Metas,
                         Miembros: vm.Miembros,
-                        Reportes: vm.Reportes 
+                        Reportes: vm.Reportes
                     };
-                    vm.IgleRef.set(vm.temp).then(function () {
+                    vm.IgleRef = vm.db.collection("Iglesias").doc(vm.email).collection("Celulas").doc(vm.Celula)
+                    .set(vm.temp).then(function () {
                         console.log('status saved');
                     }).catch(function (erro) {
                         console.log('Got Erro');
