@@ -408,7 +408,7 @@
                             vm.MailSent()
                             vm.SaveData()
                         }, function(err) { console.log("FAILED. error=", err);
-                            vm.MailFail()
+                            vm.MailFail('Revisa tu conexión a internet ó intentalo mas tarde!')
                         });
                 },
                 SaveData: function(){
@@ -426,7 +426,7 @@
                         ofrenda: vm.ofrenda,
                         elavorado: vm.elaborado
                     });
-
+                    
                     this.CelRef.set(vm.celulaData).then(function () {
                         console.log('status saved');
                     }).catch(function (erro) {
@@ -441,15 +441,16 @@
                     vm.CelRef.get().then(function(doc){
                         if(doc.exists){
                             vm.celulaData = doc.data();
+                            setTimeout(function(){
+                                vm.lider = vm.celulaData.Lider.nombre;
+                                vm.asistente = vm.celulaData.Asistente.nombre;
+                                vm.SendEmail();
+                            }, 1000);
                         }else{
                             console.log('Document not Exists');
+                            vm.MailFail('Aún no has mandado tu reporte Cuatrimestra, por lo que no podras mandar tus reportes semanales');
                         }
                     });
-                    setTimeout(function(){
-                        vm.lider = vm.celulaData.Lider.nombre;
-                        vm.asistente = vm.celulaData.Asistente.nombre;
-                        vm.SendEmail();
-                    }, 1000);
                 },
                 AddRow: function(name, list) {
                     list.push({ name: name});
@@ -459,9 +460,9 @@
                     Vue.delete(list, row);
                     this.Clean();
                 },
-                MailFail: function() {
+                MailFail: function(msg) {
                     this.status = 'Envío Fallido';
-                    this.msg = 'Revisa tu conexión a internet ó intentalo mas tarde!';
+                    this.msg = msg;
                     this.modalColor = 'is-danger';
                     this.exc = false;
                     this.check = true;
