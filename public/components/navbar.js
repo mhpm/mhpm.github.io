@@ -20,9 +20,10 @@ Vue.component('app-nav', {
                         </a>
                         <div class="navbar-dropdown is-boxed">
                             <a href="formato.html" class="navbar-item has-text-dark">Cuatrimestral</a>
+                            <a href="amigos.html" class="navbar-item has-text-dark">Amigos Anotados</a>
                             <hr class="divider">
                             <a class="navbar-item has-text-primary">
-                                Version 1.3
+                                Version 1.7
                             </a>
                         </div>
                     </div>

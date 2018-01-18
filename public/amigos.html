@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amigos</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/minty/bulmaswatch.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("user_djaPZWhrJkKZhYgeQsDnz");
+        })();
+    </script>
+</head>
+<body>
+    <div id="root">
+        <app-nav></app-nav>
+        <div class="hero-body">
+            <div class="container">
+                <div class="notification is-primary">
+                    <h1 class="title is-h1 has-text-centered">AMIGOS ANOTADOS EN EL CICLO</h1>
+                </div>
+                <form v-on:submit.prevent="LoadData">
+                    <div class="columns">
+                        <div class="column">
+                            <h1 class="title"></h1>
+
+                            <div class="field">
+                                <label class="label">Célula</label>
+                                <div class="control has-icons-left">
+                                    <input class="input is-medium" type="number" v-model="Celula" placeholder="Número" oninvalid="this.setCustomValidity('Campos Obligatorios')"
+                                        oninput="setCustomValidity('')" required />
+                                    <span class="icon is-small is-left">
+                                        <i class="fab fa-slack"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <h5 class="title is-5">Padre Espiritual</h5>
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <input class="input" v-model="padre" type="text" placeholder="Nombre completo">
+                                </div>
+                                <div class="control">
+                                    <a class="button is-primary" v-on:click="AddPadre(padre, Padres)" v-if="padre != ''">
+                                        Agregar
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <table class="table">
+                                    <tr>
+                                        <th><h5 class="title is-5">Padres: {{Padres.length}}</h5></th>
+                                        <th><h5 class="title is-5">Hijos: {{totalHijos}}</h5></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr v-for="p, index in Padres">
+                                        <td>
+                                            <label class="label">{{p.nombre}}</label>
+                                            <table>
+                                                <tr v-for="h, index in p.hijos">
+                                                    <td><span>{{h.nombre}}</span></td>
+                                                    <td><a class="tag is-danger" v-on:click="removeRow(index, p.hijos)">Quitar</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <div class="field has-addons">
+                                                <div class="control">
+                                                    <input class="input is-small" v-model="p.hijo" type="text" placeholder="Nombre de Hijo">
+                                                </div>
+                                                <div class="control">
+                                                    <a class="button is-small is-primary" v-on:click="AddHijo(p.hijo, p.hijos)" v-if="p.hijo != ''">
+                                                        Agregar
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><a class="tag is-danger" v-on:click="removeRow(index, Padres)">Quitar</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field is-grouped is-grouped-centered">
+                                <div class="control">
+                                    <input class="button is-primary is-medium" type="submit" value="Enviar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div v-bind:class="{modal:true, 'is-active':modalActive}">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <section v-bind:class="['hero is-medium', modalColor]">
+                        <div class="hero-body">
+                            <div class="container" id="StatusBoard">
+                                <h1 class="title is-1">{{status}}</h1>
+                                <h4 class="subtitle is-4">{{msg}}</h4>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <button v-on:click="CloseModal" class="modal-close is-large" aria-label="close"></button>
+            </div>
+        </div>
+        <app-foot></app-foot>
+    </div>
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
+    <script src="js/firebase.js"></script>
+
+    <script src="js/vue.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+
+    <script>
+        new Vue ({
+            el:'#root',
+            data:{
+                Celula:'',
+                Lider:'',
+                Email:'',
+                padre:'',
+                Padres:[],
+                totalHijos:0,
+                modalActive: false,
+                modalColor: 'is-warning',
+                status: "Enviando Reporte...",
+                msg: "Espere por favor",
+                sent: false,
+                db:'',
+                celulaData:''
+            },
+            created:function(){
+                var vm = this;
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        vm.Email = user.email;
+                    } 
+                });
+                this.db = firebase.firestore();
+            },
+            methods:{
+                SendEmail: function() {
+                    var vm = this;
+                    vm.modalActive = true;
+                    emailjs.send("rcmcontrol", "amigos_template", {
+                            Email: vm.Email,
+                            Celula: vm.Celula,
+                            Lider: vm.Lider,
+                            Padres: vm.Padres,
+                            Hijos: vm.totalHijos
+                        })
+                        .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
+                                vm.MailSent();
+                                //vm.SaveData();
+                            }, function(err) { console.log("FAILED. error=", err);
+                                vm.MailFail();
+                        });
+                },
+                SaveData: function(){
+                    var vm = this
+                    vm.temp = {
+                        Cgrupo: vm.Cgrupo,
+                        Lider: vm.Lider,
+                        Asistente: vm.Asistente,
+                        Planeacion: vm.Planeacion,
+                        Alcance: vm.Alcance,
+                        Metas: vm.Metas,
+                        Miembros: vm.Miembros,
+                        Reportes: vm.Reportes
+                    };
+                    vm.IgleRef = vm.db.collection("Iglesias").doc(vm.email).collection("Celulas").doc(vm.Celula)
+                    .set(vm.temp).then(function () {
+                        console.log('status saved');
+                    }).catch(function (erro) {
+                        console.log('Got Erro');
+                        console.log(erro);
+                    });
+                },
+                LoadData: function () {
+                    var vm = this
+                    vm.modalActive = true;
+                    vm.CelRef = vm.db.collection("Iglesias").doc(vm.Email).collection("Celulas").doc(vm.Celula);
+                    vm.CelRef.get().then(function(doc){
+                        if(doc.exists){
+                            vm.celulaData = doc.data();
+                            setTimeout(function(){
+                                vm.Lider = vm.celulaData.Lider.nombre;
+                                vm.SendEmail();
+                            }, 1000);
+                        }else{
+                            console.log('Document not Exists');
+                            vm.MailFail('Aún no has mandado tu reporte Cuatrimestra, por lo que no podras mandar este reporte');
+                        }
+                    });
+                },
+                AddPadre: function(name, list) {
+                    list.push({nombre: name, hijos:[]});
+                    this.clearMiembro()
+                },
+                AddHijo:function(name, list){
+                    list.push({nombre: name});
+                    this.TotalHijos()
+                    name = '';
+                },
+                removeRow: function(row, list) {
+                    Vue.delete(list, row);
+                    this.TotalHijos()
+                },
+                MailFail: function(msg) {
+                    this.status = 'Envío Fallido';
+                    this.msg = msg;
+                    this.modalColor = 'is-danger';
+                    this.exc = false;
+                    this.check = true;
+                },
+                MailSent: function() {
+                    this.status = "Reporte Enviado!";
+                    this.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
+                    this.modalColor = 'is-primary';
+                    this.sent = true;
+                },
+                CloseModal: function(){
+                    this.modalActive = false;
+                    this.status = 'Enviando Reporte...';
+                    this.msg = 'Espere por favor';
+                    this.modalColor = 'is-warning';
+                    if(this.sent){ location.reload(); }
+                },
+                clearMiembro: function(){
+                    this.padre = '';
+                },
+                TotalHijos: function(){
+                    this.totalHijos = 0;
+                    for (i = 0; i < this.Padres.length; i++)
+                    {
+                        this.totalHijos += this.Padres[i].hijos.length
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
