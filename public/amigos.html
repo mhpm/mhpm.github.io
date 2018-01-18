@@ -95,7 +95,7 @@
                         <div class="column">
                             <div class="field is-grouped is-grouped-centered">
                                 <div class="control">
-                                    <input class="button is-primary is-medium" type="submit" value="Enviar">
+                                    <input class="button is-primary is-medium" type="submit" value="Enviar" :disabled="Padres.length <= 0 || totalHijos <= 0">
                                 </div>
                             </div>
                         </div>
