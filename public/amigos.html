@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Amigos</title>
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/minty/bulmaswatch.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/footer.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -47,43 +47,39 @@
                             <h5 class="title is-5">Padre Espiritual</h5>
                             <div class="field has-addons">
                                 <div class="control">
-                                    <input class="input" v-model="padre" type="text" placeholder="Nombre completo">
+                                    <input class="input" v-model="padre" type="text" placeholder="Nombre del padre">
                                 </div>
                                 <div class="control">
-                                    <a class="button is-primary" v-on:click="AddPadre(padre, Padres)" v-if="padre != ''">
-                                        Agregar
-                                    </a>
+                                    <a class="button is-primary is-normal" v-on:click="AddPadre(padre, Padres)" v-if="padre != ''">Agregar</a>
                                 </div>
                             </div>
                             <div class="field">
-                                <table class="table">
+                                <table class="table is-fullwidth">
                                     <tr>
                                         <th><h5 class="title is-5">Padres: {{Padres.length}}</h5></th>
                                         <th><h5 class="title is-5">Hijos: {{totalHijos}}</h5></th>
-                                        <th></th>
-                                        <th></th>
                                     </tr>
                                     <tr v-for="p, index in Padres">
                                         <td>
                                             <label class="label">{{p.nombre}}</label>
-                                            <table>
+                                            <table class="table">
+                                                <tr>
+                                                    <div class="field has-addons">
+                                                        <div class="control">
+                                                            <input class="input is-small" v-model="p.hijo" type="text" placeholder="Nombre de Hijo">
+                                                        </div>
+                                                        <div class="control">
+                                                            <a class="button is-small is-primary" v-on:click="AddHijo(p.hijo, p.hijos)" v-if="p.hijo != ''">
+                                                                Agregar
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </tr>
                                                 <tr v-for="h, index in p.hijos">
                                                     <td><span>{{h.nombre}}</span></td>
                                                     <td><a class="tag is-danger" v-on:click="removeRow(index, p.hijos)">Quitar</a></td>
                                                 </tr>
                                             </table>
-                                        </td>
-                                        <td>
-                                            <div class="field has-addons">
-                                                <div class="control">
-                                                    <input class="input is-small" v-model="p.hijo" type="text" placeholder="Nombre de Hijo">
-                                                </div>
-                                                <div class="control">
-                                                    <a class="button is-small is-primary" v-on:click="AddHijo(p.hijo, p.hijos)" v-if="p.hijo != ''">
-                                                        Agregar
-                                                    </a>
-                                                </div>
-                                            </div>
                                         </td>
                                         <td><a class="tag is-danger" v-on:click="removeRow(index, Padres)">Quitar</a></td>
                                     </tr>
@@ -95,7 +91,7 @@
                         <div class="column">
                             <div class="field is-grouped is-grouped-centered">
                                 <div class="control">
-                                    <input class="button is-primary is-medium" type="submit" value="Enviar" :disabled="Padres.length <= 0 || totalHijos <= 0">
+                                    <input class="button is-primary is-medium is-rounded" type="submit" value="Enviar" :disabled="Padres.length <= 0 || totalHijos <= 0">
                                 </div>
                             </div>
                         </div>
@@ -133,6 +129,7 @@
     <script src="js/vue.js"></script>
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
+    <script src="components/modal.js"></script>
 
     <script>
         new Vue ({
@@ -212,18 +209,18 @@
                             }, 1000);
                         }else{
                             console.log('Document not Exists');
-                            vm.MailFail('Aún no has mandado tu reporte Cuatrimestra, por lo que no podras mandar este reporte');
+                            vm.MailFail('Aún no has mandado tu reporte Cuatrimestral, por lo que no podras mandar este Reporte');
                         }
                     });
                 },
                 AddPadre: function(name, list) {
-                    list.push({nombre: name, hijos:[]});
-                    this.clearMiembro()
+                    list.push({nombre: name, hijo:'', hijos:[]});
+                    this.padre = '';
                 },
                 AddHijo:function(name, list){
                     list.push({nombre: name});
                     this.TotalHijos()
-                    name = '';
+                    this.CleanHijo()
                 },
                 removeRow: function(row, list) {
                     Vue.delete(list, row);
@@ -249,8 +246,11 @@
                     this.modalColor = 'is-warning';
                     if(this.sent){ location.reload(); }
                 },
-                clearMiembro: function(){
-                    this.padre = '';
+                CleanHijo: function(){
+                    for (i = 0; i < this.Padres.length; i++)
+                    {
+                        this.Padres[i].hijo = '';
+                    }
                 },
                 TotalHijos: function(){
                     this.totalHijos = 0;
