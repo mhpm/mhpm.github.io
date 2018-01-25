@@ -1,6 +1,6 @@
 Vue.component('app-modal', {
     template:
-        `<div v-bind:class="{modal:true, 'is-active':modalActive}">
+        `<div v-bind:class="['modal', modalActive]">
             <div class="modal-background"></div>
             <div class="modal-content">
                 <section v-bind:class="['hero is-medium', modalColor]">
@@ -15,24 +15,21 @@ Vue.component('app-modal', {
             <button v-on:click="CloseModal" class="modal-close is-large" aria-label="close"></button>
         </div>`
     ,
-    return:{
-        data:{
-            modalActive: false,
+    data:function(){
+        return {
+            modalActive: '',
             modalColor: 'is-warning',
             status: 'Enviando Reporte...',
             msg: 'Espere por favor',
             sent: false
         }
     },
-    created: function() {
-    },
     methods: {
         MailFail: function(msg) {
             this.status = 'Envío Fallido';
             this.msg = msg;
             this.modalColor = 'is-danger';
-            this.exc = false;
-            this.check = true;
+            console.log(msg);
         },
         MailSent: function() {
             this.status = 'Reporte Enviado!';
@@ -41,7 +38,7 @@ Vue.component('app-modal', {
             this.sent = true;
         },
         CloseModal: function(){
-            this.modalActive = false;
+            this.modalActive = '';
             this.status = 'Enviando Reporte...';
             this.msg = 'Espere por favor';
             this.modalColor = 'is-warning';

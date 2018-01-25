@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/footer.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
         (function () {
@@ -91,27 +91,14 @@
                         <div class="column">
                             <div class="field is-grouped is-grouped-centered">
                                 <div class="control">
-                                    <input class="button is-primary is-medium is-rounded" type="submit" value="Enviar" :disabled="Padres.length <= 0 || totalHijos <= 0">
+                                    <input class="button is-primary is-medium" type="submit" value="Enviar" :disabled="Padres.length <= 0 || totalHijos <= 0">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div v-bind:class="{modal:true, 'is-active':modalActive}">
-                <div class="modal-background"></div>
-                <div class="modal-content">
-                    <section v-bind:class="['hero is-medium', modalColor]">
-                        <div class="hero-body">
-                            <div class="container" id="StatusBoard">
-                                <h1 class="title is-1">{{status}}</h1>
-                                <h4 class="subtitle is-4">{{msg}}</h4>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <button v-on:click="CloseModal" class="modal-close is-large" aria-label="close"></button>
-            </div>
+            <app-modal ref="modal"></app-modal>
         </div>
         <app-foot></app-foot>
     </div>
@@ -125,8 +112,8 @@
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
     <script src="js/firebase.js"></script>
+    <script src="js/vue.min.js"></script>
 
-    <script src="js/vue.js"></script>
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
     <script src="components/modal.js"></script>
@@ -141,11 +128,6 @@
                 padre:'',
                 Padres:[],
                 totalHijos:0,
-                modalActive: false,
-                modalColor: 'is-warning',
-                status: "Enviando Reporte...",
-                msg: "Espere por favor",
-                sent: false,
                 db:'',
                 celulaData:''
             },
@@ -158,10 +140,13 @@
                 });
                 this.db = firebase.firestore();
             },
+            mounted:function(){
+                var vm = this
+                vm.Modal = vm.$refs.modal;
+            },
             methods:{
                 SendEmail: function() {
                     var vm = this;
-                    vm.modalActive = true;
                     emailjs.send("rcmcontrol", "amigos_template", {
                             Email: vm.Email,
                             Celula: vm.Celula,
@@ -170,10 +155,10 @@
                             Hijos: vm.totalHijos
                         })
                         .then(function(response) { console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
-                                vm.MailSent();
+                                vm.Modal.MailSent();
                                 //vm.SaveData();
                             }, function(err) { console.log("FAILED. error=", err);
-                                vm.MailFail();
+                                vm.Modal.MailFail('Revisa tu conexión a internet ó intentalo mas tarde!');
                         });
                 },
                 SaveData: function(){
@@ -198,7 +183,7 @@
                 },
                 LoadData: function () {
                     var vm = this
-                    vm.modalActive = true;
+                    vm.Modal.modalActive = 'is-active';
                     vm.CelRef = vm.db.collection("Iglesias").doc(vm.Email).collection("Celulas").doc(vm.Celula);
                     vm.CelRef.get().then(function(doc){
                         if(doc.exists){
@@ -209,7 +194,7 @@
                             }, 1000);
                         }else{
                             console.log('Document not Exists');
-                            vm.MailFail('Aún no has mandado tu reporte Cuatrimestral, por lo que no podras mandar este Reporte');
+                            vm.Modal.MailFail('Aún no has mandado tu reporte Cuatrimestral, por lo que no podras mandar este Reporte');
                         }
                     });
                 },
@@ -225,26 +210,6 @@
                 removeRow: function(row, list) {
                     Vue.delete(list, row);
                     this.TotalHijos()
-                },
-                MailFail: function(msg) {
-                    this.status = 'Envío Fallido';
-                    this.msg = msg;
-                    this.modalColor = 'is-danger';
-                    this.exc = false;
-                    this.check = true;
-                },
-                MailSent: function() {
-                    this.status = "Reporte Enviado!";
-                    this.msg = "Gracias por cumplir a tiempo, Dios te bendiga!";
-                    this.modalColor = 'is-primary';
-                    this.sent = true;
-                },
-                CloseModal: function(){
-                    this.modalActive = false;
-                    this.status = 'Enviando Reporte...';
-                    this.msg = 'Espere por favor';
-                    this.modalColor = 'is-warning';
-                    if(this.sent){ location.reload(); }
                 },
                 CleanHijo: function(){
                     for (i = 0; i < this.Padres.length; i++)
