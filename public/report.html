@@ -325,7 +325,7 @@
             data:{
                 email:'',
                 celula: '',
-                lider: '',
+                lider: {},
                 asistente: '',
                 tema: '1 - La palabra fuente de vida',
                 lugar: '',
@@ -427,7 +427,7 @@
                         if(doc.exists){
                             vm.celulaData = doc.data();
                             setTimeout(function(){
-                                vm.lider = vm.celulaData.Lider.nombre;
+                                vm.lider = vm.celulaData.Lider;
                                 vm.asistente = vm.celulaData.Asistente.nombre;
                                 vm.SendEmail();
                             }, 1000);

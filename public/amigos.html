@@ -123,7 +123,7 @@
             el:'#root',
             data:{
                 Celula:'',
-                Lider:'',
+                Lider:{},
                 Email:'',
                 padre:'',
                 Padres:[],
@@ -189,7 +189,7 @@
                         if(doc.exists){
                             vm.celulaData = doc.data();
                             setTimeout(function(){
-                                vm.Lider = vm.celulaData.Lider.nombre;
+                                vm.Lider = vm.celulaData.Lider;
                                 vm.SendEmail();
                             }, 1000);
                         }else{
