@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-
+    <link rel="icon" href="img/rcm.png" type="image/png">
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/minty/bulmaswatch.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <style type="text/css">
@@ -18,7 +18,7 @@
           justify-content: center;
         }
         img {
-          margin-bottom: 20px;
+          margin-bottom: 35px;
         }
         .container {
           padding: 10px;
@@ -34,11 +34,11 @@
         <section class="section is-vertical-center">
             <div class="container">
                 <div class="columns">
-                    <div class="column is-6">
+                    <div class="column is-one-third">
                         <form v-on:submit.prevent="Login(email, password)">
                             <div class="field is-grouped is-grouped-centered">
                                     <figure class="image">
-                                        <img width="20" src="img/logo4.png">
+                                        <img src="img/logo.png">
                                     </figure>
                             </div>
                             <div class="field">
@@ -55,7 +55,6 @@
                                     <p class="help is-danger"></p>
                                 </p>
                             </div>
-
                             <div class="field">
                                 <p class="control has-icons-left">
                                     <input v-model="password" class="input is-medium" type="password" placeholder="Password"
@@ -75,7 +74,7 @@
                             </div>
                             <div class="field is-grouped is-grouped-centered">
                                 <p class="control">
-                                    <input type="submit" class="button is-primary is-large" value="Entrar"/>
+                                    <input type="submit" class="button is-primary is-medium" value="Entrar"/>
                                 </p>
                             </div>
                         </form>
