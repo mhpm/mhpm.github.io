@@ -7,9 +7,9 @@
     <title>Reporte</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/minty/bulmaswatch.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/litera/bulmaswatch.min.css">
     <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/loader.css">
     
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -420,7 +420,7 @@
                 },
                 LoadData: function () {
                     var vm = this
-                    vm.Modal.modalActive = 'is-active';
+                    vm.Modal.Start();
                     vm.CelRef = vm.db.collection("Iglesias").doc(vm.email).collection("Celulas").doc(vm.celula);
                     vm.CelRef.get().then(function(doc){
                         if(doc.exists){

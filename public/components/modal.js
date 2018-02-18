@@ -6,6 +6,7 @@ Vue.component('app-modal', {
                 <section v-bind:class="['hero is-medium', modalColor]">
                     <div class="hero-body">
                         <div class="container" id="StatusBoard">
+                            <div v-bind:class="{loaderIcon: spin}"></div>
                             <h1 class="title is-1">{{status}}</h1>
                             <h4 class="subtitle is-4">{{msg}}</h4>
                         </div>
@@ -21,7 +22,8 @@ Vue.component('app-modal', {
             modalColor: 'is-warning',
             status: 'Enviando Reporte...',
             msg: 'Espere por favor',
-            sent: false
+            sent: false,
+            spin:true
         }
     },
     methods: {
@@ -30,12 +32,14 @@ Vue.component('app-modal', {
             this.msg = msg;
             this.modalColor = 'is-danger';
             console.log(msg);
+            this.spin = false;
         },
         MailSent: function() {
             this.status = 'Reporte Enviado!';
             this.msg = 'Gracias por cumplir a tiempo, Dios te bendiga!';
             this.modalColor = 'is-primary';
             this.sent = true;
+            this.spin = false;
         },
         CloseModal: function(){
             this.modalActive = '';
@@ -43,6 +47,9 @@ Vue.component('app-modal', {
             this.msg = 'Espere por favor';
             this.modalColor = 'is-warning';
             if(this.sent){ location.reload(); }
+        },
+        Start(){
+            this.modalActive = 'is-active';
         }
     }
 })

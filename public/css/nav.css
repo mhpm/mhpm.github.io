@@ -1,11 +1,11 @@
 .navbar-burger {
-    background-color: #6abfb0 !important;
+    background-color: #45b2d3 !important;
   }
   .navbar-burger span {
     height: 3px;
     left: calc(50%);
   }
   hr {
-    background-color: #6abfb0;
+    background-color: #45b2d3;
     margin: 0px;
   }
